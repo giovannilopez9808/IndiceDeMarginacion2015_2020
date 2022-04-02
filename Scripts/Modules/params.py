@@ -21,7 +21,6 @@ def get_params() -> dict:
         "useless columns": ["NOM_ENT",
                             "NOM_MUN"],
         "embedding columns": [
-            'POB_TOT',
             'ANALF',
             'SBASC',
             'OVSDE',
@@ -30,7 +29,20 @@ def get_params() -> dict:
             'OVPT',
             'VHAC',
             'PL.5000',
-            'PO2SM']
+            'PO2SM'
+        ],
+        "classes": {
+            'Muy bajo': {"id": 0,
+                         "color": "#ef476f"},
+            'Bajo': {"id": 1,
+                     "color": "#ffd166"},
+            'Medio': {"id": 2,
+                      "color": "#06d6a0"},
+            'Alto': {"id": 3,
+                     "color": "#118ab2"},
+            'Muy alto': {"id": 4,
+                         "color": "#f3722c"},
+        }
     }
     # Verificación de la carpeta de resultados
     mkdir(params["path results"],

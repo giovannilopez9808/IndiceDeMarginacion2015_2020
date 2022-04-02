@@ -1,3 +1,4 @@
+from numpy.linalg import norm as normalize
 from pandas import DataFrame, read_csv
 from os.path import join
 from numpy import array
@@ -14,6 +15,7 @@ class data_class:
         """
         self._embedding_columns = params["embedding columns"]
         self._useless_colums = params["useless columns"]
+        self.classes = params["classes"]
         self.params = params
         self.read()
 
@@ -54,6 +56,7 @@ class data_class:
         self._obtain_index_town()
         self._obtain_index_state()
         self._clean_data()
+        self._classify_with_GM_column()
         self._obtain_embedding()
         self._initialize_results_dataframe()
 
@@ -67,7 +70,11 @@ class data_class:
                         encoding=encoding)
         return data
 
-    def _obtain_index_town(self):
+    def _classify_with_GM_column(self) -> None:
+        self.data_2020["classes"] = self.data_2020["GM"].apply(
+            lambda x: self.classes[x]["id"])
+
+    def _obtain_index_town(self) -> dict:
         """
         Creacion de un diccionario del nombre de cada municipio
         """
@@ -103,7 +110,8 @@ class data_class:
         embedding = DataFrame()
         for column in self._embedding_columns:
             embedding[column] = self.data_2020[column]
-        self.embedding = embedding.to_numpy()
+        self.embedding = embedding.to_numpy().T
+        self.embedding = self.embedding.T @ self.embedding
 
     def _initialize_results_dataframe(self) -> DataFrame:
         self.results = DataFrame()
