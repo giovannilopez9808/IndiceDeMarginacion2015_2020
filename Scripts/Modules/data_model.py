@@ -12,6 +12,8 @@ class data_class:
         params: diccionario con las rutas y nombres de los archivos
         """
         self.params = params
+        self._useless_colums = ["NOM_ENT",
+                                "NOM_MUN"]
         self.read()
 
     def read(self) -> None:
@@ -50,6 +52,7 @@ class data_class:
                                         "utf-8")
         self._obtain_index_town()
         self._obtain_index_state()
+        self.clean_data()
 
     def read_file(self, path: str, name: str, encoding: str) -> DataFrame:
         """
@@ -82,3 +85,7 @@ class data_class:
             state = self.data_2020["NOM_ENT"][i]
             index_state[index] = state
         self.index_state = index_state
+
+    def clean_data(self):
+        self.data_1990 = self.data_1990.drop(columns=self._useless_colums)
+        self.data_2020 = self.data_2020.drop(columns=self._useless_colums)
