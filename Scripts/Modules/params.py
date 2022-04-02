@@ -30,8 +30,7 @@ def get_params() -> dict:
             'OVPT',
             'VHAC',
             'PL.5000',
-            'PO2SM',
-            'IM']
+            'PO2SM']
     }
     # Verificación de la carpeta de resultados
     mkdir(params["path results"],

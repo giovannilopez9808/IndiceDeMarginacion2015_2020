@@ -55,6 +55,7 @@ class data_class:
         self._obtain_index_state()
         self._clean_data()
         self._obtain_embedding()
+        self._initialize_results_dataframe()
 
     def read_file(self, path: str, name: str, encoding: str) -> DataFrame:
         """
@@ -96,7 +97,16 @@ class data_class:
         self.data_2020 = self.data_2020.drop(columns=self._useless_colums)
 
     def _obtain_embedding(self) -> array:
+        """
+        Creacion de la matriz de embeddings para realizar sus analisis
+        """
         embedding = DataFrame()
         for column in self._embedding_columns:
             embedding[column] = self.data_2020[column]
         self.embedding = embedding.to_numpy()
+
+    def _initialize_results_dataframe(self) -> DataFrame:
+        self.results = DataFrame()
+        self.results["CVE_MUN"] = self.data_2020["CVE_MUN"]
+        self.results["IM"] = self.data_2020["IM"]
+        self.results["IMN"] = self.data_2020["IMN"]
