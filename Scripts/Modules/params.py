@@ -1,4 +1,4 @@
-from os import makedirs as mkdir
+from os import makedirs
 
 
 def get_params() -> dict:
@@ -18,8 +18,10 @@ def get_params() -> dict:
         "path results": "../Results",
         # Direccion de las graficas
         "path graphics": "../Graphics",
-        "useless columns": ["NOM_ENT",
-                            "NOM_MUN"],
+        "useless columns": [
+            "NOM_ENT",
+            "NOM_MUN"
+        ],
         "embedding columns": [
             'ANALF',
             'SBASC',
@@ -42,12 +44,20 @@ def get_params() -> dict:
                      "color": "#118ab2"},
             'Muy alto': {"id": 4,
                          "color": "#f3722c"},
-        }
+        },
+        # Parametros para el método de PCA
+        "PCA": {"2D": {"kernel": "cosine",
+                       "components": 2},
+                "3D": {"kernel": "poly",
+                       "components": 3}, },
     }
     # Verificación de la carpeta de resultados
-    mkdir(params["path results"],
-          exist_ok=True)
+    mkdir(params["path results"])
     # Verificación de la carpeta de las graficas
-    mkdir(params["path graphics"],
-          exist_ok=True)
+    mkdir(params["path graphics"])
     return params
+
+
+def mkdir(path) -> None:
+    makedirs(path,
+             exist_ok=True)

@@ -1,4 +1,3 @@
-from numpy.linalg import norm as normalize
 from pandas import DataFrame, read_csv
 from os.path import join
 from numpy import array
@@ -67,7 +66,7 @@ class data_class:
         filename = join(path,
                         name)
         data = read_csv(filename,
-                        encoding=encoding)
+                        encoding=encoding,)
         return data
 
     def _classify_with_GM_column(self) -> None:
@@ -110,11 +109,31 @@ class data_class:
         embedding = DataFrame()
         for column in self._embedding_columns:
             embedding[column] = self.data_2020[column]
-        self.embedding = embedding.to_numpy().T
-        self.embedding = self.embedding.T @ self.embedding
+        self.embedding = embedding.to_numpy()
+        self.embedding = self.embedding @ self.embedding.T
 
     def _initialize_results_dataframe(self) -> DataFrame:
         self.results = DataFrame()
         self.results["CVE_MUN"] = self.data_2020["CVE_MUN"]
+        self.results["GM"] = self.data_2020["GM"]
         self.results["IM"] = self.data_2020["IM"]
         self.results["IMN"] = self.data_2020["IMN"]
+
+    def add_results(self, data: array, names: list) -> None:
+        """
+        Añadir vectores de resultados a los creados anteriormente
+        """
+        n = len(names)
+        for i in range(n):
+            values = data[:, i]
+            name = names[i]
+            self.results[name] = values
+
+    def save_results(self, filename: str):
+        """
+        Guardado de lso resultados en la ruta señalada en los parametros dados y el nombre ingresado
+        """
+        filename = join(self.params["path results"],
+                        filename)
+        self.results.to_csv(filename,
+                            index=False)
