@@ -18,6 +18,20 @@ def get_params() -> dict:
         "path results": "../Results",
         # Direccion de las graficas
         "path graphics": "../Graphics",
+        "useless columns": ["NOM_ENT",
+                            "NOM_MUN"],
+        "embedding columns": [
+            'POB_TOT',
+            'ANALF',
+            'SBASC',
+            'OVSDE',
+            'OVSEE',
+            'OVSAE',
+            'OVPT',
+            'VHAC',
+            'PL.5000',
+            'PO2SM',
+            'IM']
     }
     # Verificación de la carpeta de resultados
     mkdir(params["path results"],

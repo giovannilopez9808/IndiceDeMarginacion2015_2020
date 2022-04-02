@@ -1,5 +1,6 @@
 from pandas import DataFrame, read_csv
 from os.path import join
+from numpy import array
 
 
 class data_class:
@@ -11,9 +12,9 @@ class data_class:
         ----------------
         params: diccionario con las rutas y nombres de los archivos
         """
+        self._embedding_columns = params["embedding columns"]
+        self._useless_colums = params["useless columns"]
         self.params = params
-        self._useless_colums = ["NOM_ENT",
-                                "NOM_MUN"]
         self.read()
 
     def read(self) -> None:
@@ -23,7 +24,7 @@ class data_class:
         self.read_dictionary()
         self.read_data()
 
-    def read_dictionary(self) -> None:
+    def read_dictionary(self) -> dict:
         """
         Lectura del diccionario de siglas de los datos
         """
@@ -40,7 +41,7 @@ class data_class:
         # Guardado el diccionario
         self.dictonary = dictionary
 
-    def read_data(self) -> None:
+    def read_data(self) -> DataFrame:
         """
         Lectura de los archivos de datos de 1990 a 2020
         """
@@ -52,7 +53,8 @@ class data_class:
                                         "utf-8")
         self._obtain_index_town()
         self._obtain_index_state()
-        self.clean_data()
+        self._clean_data()
+        self._obtain_embedding()
 
     def read_file(self, path: str, name: str, encoding: str) -> DataFrame:
         """
@@ -86,6 +88,15 @@ class data_class:
             index_state[index] = state
         self.index_state = index_state
 
-    def clean_data(self):
+    def _clean_data(self):
+        """
+        Limpieza de las columnas que no seran utilizadas
+        """
         self.data_1990 = self.data_1990.drop(columns=self._useless_colums)
         self.data_2020 = self.data_2020.drop(columns=self._useless_colums)
+
+    def _obtain_embedding(self) -> array:
+        embedding = DataFrame()
+        for column in self._embedding_columns:
+            embedding[column] = self.data_2020[column]
+        self.embedding = embedding.to_numpy()
