@@ -20,33 +20,39 @@ params["file results"] = "PCA_2D.csv"
 data = data_class(params)
 # Inicializacion del modelo
 pca = PCA_model()
-pca.create(params["PCA"]["2D"]["components"],
-           params["PCA"]["2D"]["kernel"])
 # Calculo de PCA
-pca.run(data.embedding)
 # Resultados
-vectors = pca.get_eigenvectors()
-data.add_results(vectors,
-                 pca.names)
-data.save_results(params["file results"])
-plt.subplots(figsize=(12, 8))
-# Ploteo de cada clase
-for classes in data.classes:
-    index = data.data_2020["GM"] == classes
-    index = array(data.data_2020.index[index])
-    color = data.classes[classes]["color"]
-    subset = vectors[index]
-    plt.scatter(subset[:, 0],
-                subset[:, 1],
-                alpha=0.5,
-                c=color,
-                label=classes)
-plt.axis("off")
-plt.tight_layout(pad=2)
-plt.legend(ncol=len(data.classes),
-           bbox_to_anchor=(0.75, 1.025))
+fig, axs = plt.subplots(2, 2, figsize=(12, 8))
+axs = axs.flatten()
+for ax, kernel in zip(axs, params["PCA"]["kernels"]):
+    pca.create(params["PCA"]["2D"]["components"],
+               kernel)
+    pca.run(data.embedding)
+    vectors = pca.get_eigenvectors()
+    data.add_results(vectors,
+                     pca.names)
+    # Ploteo de cada clase
+    ax.set_title(kernel)
+    for classes in data.classes:
+        index = data.data_2020["GM"] == classes
+        index = array(data.data_2020.index[index])
+        color = data.classes[classes]["color"]
+        subset = vectors[index]
+        ax.scatter(subset[:, 0],
+                   subset[:, 1],
+                   alpha=0.5,
+                   c=color,
+                   label=classes)
+        ax.axis("off")
+plt.tight_layout(pad=3)
+handles, labels = ax.get_legend_handles_labels()
+fig.legend(handles, labels,
+           frameon=False,
+           ncol=len(data.classes),
+           bbox_to_anchor=(0.75, 1.01))
 # Guardado de cada grafica
 filename = join(params["path graphics"],
                 params["file graphics"])
 plt.savefig(filename,
             dpi=300)
+data.save_results(params["file results"])

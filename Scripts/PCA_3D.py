@@ -51,7 +51,7 @@ plt.legend(ncol=len(data.classes),
            fontsize=12)
 plt.tight_layout()
 # Guardado de cada angulo
-for i, angle in enumerate(range(-180, 181)):
+for i, angle in enumerate(range(-180, -170)):
     ax.view_init(34, angle)
     filename = "PCA_{}".format(str(i).zfill(3))
     filename = join(params["path pictures"],

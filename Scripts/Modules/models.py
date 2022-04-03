@@ -9,16 +9,15 @@ class PCA_model:
     def create(self, n_components: int, kernel: str) -> None:
         self.model = KernelPCA(n_components,
                                kernel=kernel,
-                               degree=2
                                )
-        self.generate_header_names(n_components)
+        self.generate_header_names(n_components, kernel)
 
     def run(self, data: array) -> None:
         self.model.fit(data)
 
-    def generate_header_names(self, n_components: int) -> array:
-        name = "Component {}"
-        self.names = [name.format(i+1)
+    def generate_header_names(self, n_components: int, kernel: str) -> array:
+        name = "{} Component {}"
+        self.names = [name.format(kernel, i+1)
                       for i in range(n_components)]
 
     def get_eigenvectors(self) -> array:

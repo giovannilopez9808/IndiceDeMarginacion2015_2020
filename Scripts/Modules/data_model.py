@@ -1,6 +1,6 @@
 from pandas import DataFrame, read_csv
+from numpy import array, mean, std
 from os.path import join
-from numpy import array
 
 
 class data_class:
@@ -110,7 +110,9 @@ class data_class:
         for column in self._embedding_columns:
             embedding[column] = self.data_2020[column]
         self.embedding = embedding.to_numpy()
-        self.embedding = self.embedding @ self.embedding.T
+        mu = mean(self.embedding, axis=0)
+        sigma = std(self.embedding, axis=0)
+        self.embedding = (self.embedding-mu)/sigma
 
     def _initialize_results_dataframe(self) -> DataFrame:
         self.results = DataFrame()
