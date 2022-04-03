@@ -45,6 +45,13 @@ def get_params() -> dict:
             'Muy alto': {"id": 4,
                          "color": "#f3722c"},
         },
+        "SOM colors": {
+            0: "#ef476f",
+            1: "#ffd166",
+            2: "#06d6a0",
+            3: "#118ab2",
+            4: "#f3722c",
+        },
         # Parametros para el método de PCA
         "PCA": {
             "kernels": {
@@ -71,6 +78,12 @@ def get_params() -> dict:
             },
             "2D": {"components": 2},
             "3D": {"components": 3}
+        },
+        "LLE": {
+            "2D": {"components": 2,
+                   "neighbors": [4, 5, 6, 7]},
+            "3D": {"components": 3,
+                   "neighbors": [2, 3, 4, 6]}
         },
     }
     # Verificación de la carpeta de resultados

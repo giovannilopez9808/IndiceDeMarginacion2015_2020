@@ -19,7 +19,7 @@ class TSNE_model:
                           random_state=12345,
                           init="pca",
                           learning_rate="auto")
-        self.generate_header_names(n_components)
+        self.generate_header_names(n_components, perplexity)
 
     def run(self, data: array) -> None:
         """
@@ -27,12 +27,12 @@ class TSNE_model:
         """
         self.results = self.model.fit_transform(data)
 
-    def generate_header_names(self, n_components: int) -> array:
+    def generate_header_names(self, n_components: int, perplexity: int) -> array:
         """
         Genera el nombre de los headers para guardar los datos
         """
-        name = "Component {}"
-        self.names = [name.format(i+1)
+        name = "Perplexity {} Component {}"
+        self.names = [name.format(perplexity, i+1)
                       for i in range(n_components)]
 
     def get_results(self) -> array:
