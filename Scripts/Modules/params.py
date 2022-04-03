@@ -46,14 +46,16 @@ def get_params() -> dict:
                          "color": "#f3722c"},
         },
         # Parametros para el método de PCA
-        "PCA": {"kernels": ["linear",
-                            "rbf",
-                            "cosine",
-                            "sigmoid"],
-                "2D": {"components": 2},
-                "3D": {"kernel": "poly",
-                       "components": 3},
-                },
+        "PCA": {
+            "kernels": {
+                "linear": {"elevation": 19},
+                "rbf": {"elevation": 0},
+                "cosine": {"elevation": 0},
+                "sigmoid": {"elevation": 0}
+            },
+            "2D": {"components": 2},
+            "3D": {"components": 3},
+        },
     }
     # Verificación de la carpeta de resultados
     mkdir(params["path results"])

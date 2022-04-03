@@ -4,7 +4,7 @@ from os import listdir as ls
 from os.path import join
 
 
-def create_animation(path: str, path_pictures: str, name: str, delete: bool = True, fps: int = 3):
+def create_animation(path: str, path_pictures: str, name: str, delete: bool, fps: int):
     """
     Funcion que ejecuta la creacion de la animacion
     """
@@ -17,6 +17,5 @@ def create_animation(path: str, path_pictures: str, name: str, delete: bool = Tr
                                           fps=fps,)
     movie.write_videofile(output_file,
                           logger=None)
-    print("Creación del video en {}".format(path))
     if delete:
         terminal("rm {}*.png".format(path_pictures))

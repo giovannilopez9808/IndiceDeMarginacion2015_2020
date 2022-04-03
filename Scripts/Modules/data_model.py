@@ -121,6 +121,18 @@ class data_class:
         self.results["IM"] = self.data_2020["IM"]
         self.results["IMN"] = self.data_2020["IMN"]
 
+    def obtain_index_data_for_class(self, classes: str) -> DataFrame:
+        """
+        Obtiene los indices de la clase de dato seleccionada
+        """
+        return self.data_2020["GM"] == classes
+
+    def obtain_color_classes(self, classes: str) -> str:
+        """
+        Obtiene el color de la clase seleccionada
+        """
+        return self.classes[classes]["color"]
+
     def add_results(self, data: array, names: list) -> None:
         """
         Añadir vectores de resultados a los creados anteriormente

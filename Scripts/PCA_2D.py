@@ -6,9 +6,8 @@ Genera una gráfica con la visualziacion de los puntos en 2D y guarda los eigenv
 
 from Modules.data_model import data_class, join
 from Modules.params import get_params
-from Modules.models import PCA_model
+from Modules.pca import PCA_model
 import matplotlib.pyplot as plt
-from numpy import array
 
 # Lectura de los parametros
 params = get_params()
@@ -34,9 +33,8 @@ for ax, kernel in zip(axs, params["PCA"]["kernels"]):
     # Ploteo de cada clase
     ax.set_title(kernel)
     for classes in data.classes:
-        index = data.data_2020["GM"] == classes
-        index = array(data.data_2020.index[index])
-        color = data.classes[classes]["color"]
+        index = data.obtain_index_data_for_class(classes)
+        color = data.obtain_color_classes(classes)
         subset = vectors[index]
         ax.scatter(subset[:, 0],
                    subset[:, 1],
