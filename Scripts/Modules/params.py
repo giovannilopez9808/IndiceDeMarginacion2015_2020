@@ -56,6 +56,12 @@ def get_params() -> dict:
             "2D": {"components": 2},
             "3D": {"components": 3},
         },
+        "isomap": {
+            "2D": {"components": 2,
+                   "neighbors": [8, 10, 12, 14]},
+            "3D": {"components": 3,
+                   "neighbors": [8, 10, 12, 14]}
+        },
     }
     # Verificación de la carpeta de resultados
     mkdir(params["path results"])
