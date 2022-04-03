@@ -1,3 +1,7 @@
+"""
+Clase que contiene la estructura para la ejecuccion del modelo de PCA para diferentes datos dado el número de componentes a obtener y el nombre del kernel
+"""
+
 from sklearn.decomposition import KernelPCA
 from numpy import array
 

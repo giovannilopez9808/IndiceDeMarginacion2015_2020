@@ -1,3 +1,7 @@
+"""
+Clase que lee y organiza los datos para el guardado de los resultados y obtener diferentes parametros obtenidos del dataset. Las funciones que son para uso unico dentro de la clase tienen un guion bajo al inicio de su nombre
+"""
+
 from pandas import DataFrame, read_csv
 from numpy import array, mean, std
 from os.path import join
