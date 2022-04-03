@@ -23,7 +23,7 @@ isomap = isomap_model()
 # Resultados
 fig, axs = plt.subplots(2, 2, figsize=(12, 8))
 axs = axs.flatten()
-for ax, neighbor in zip(axs, params["isomap"]["2D"]["neighbors"]):
+for ax, neighbor in zip(axs, params["isomap"]["neighbors"]):
     isomap.create(neighbor,
                   params["isomap"]["2D"]["components"])
     isomap.run(data.embedding)

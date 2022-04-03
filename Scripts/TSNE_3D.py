@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 # Lectura de los parametros
 params = get_params()
-params["file results"] = "isomap_3D.csv"
+params["file results"] = "TSNE_3D.csv"
 # isomap file graphics name
 # Lectura de los datos
 data = data_class(params)

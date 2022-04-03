@@ -12,14 +12,14 @@ import matplotlib.pyplot as plt
 
 # Lectura de los parametros
 params = get_params()
-params["file results"] = "isomap_3D.csv"
+params["file results"] = "ISOMAP_3D.csv"
 # isomap file graphics name
 # Lectura de los datos
 data = data_class(params)
 # Inicializacion del modelo
 isomap = isomap_model()
 # Resultados
-for neighbor in params["isomap"]["3D"]["neighbors"]:
+for neighbor in params["isomap"]["neighbors"]:
     print("Analizando datos con neighbors = {}".format(neighbor))
     # Nombre y parametros del plot
     params["file animation"] = "isomap_3D_{}".format(str(neighbor).zfill(2))
@@ -27,8 +27,7 @@ for neighbor in params["isomap"]["3D"]["neighbors"]:
     params["path pictures"] = join(params["path graphics"],
                                    params["file animation"])
     mkdir(params["path pictures"])
-    # elevation = params["isomap"]["neighbors"][neighbor]["elevation"]
-    elevation = 0
+    elevation = params["isomap"]["neighbors"][neighbor]["elevation"]
     isomap.create(neighbor,
                   params["isomap"]["3D"]["components"])
     # Calculo de isomap
@@ -55,18 +54,17 @@ for neighbor in params["isomap"]["3D"]["neighbors"]:
                loc="upper center",
                fontsize=12)
     plt.tight_layout()
-    plt.show()
-#     # Guardado de cada angulo
-#     for i, angle in enumerate(range(-180, 181)):
-#         ax.view_init(34, angle)
-#         filename = "isomap_{}".format(str(i).zfill(3))
-#         filename = join(params["path pictures"],
-#                         filename)
-#         plt.savefig(filename)
-#     # Creacion de la animacion
-#     create_animation(params["path graphics"],
-#                      params["path pictures"],
-#                      params["file animation"],
-#                      delete=False,
-#                      fps=30)
-# data.save_results(params["file results"])
+    # Guardado de cada angulo
+    for i, angle in enumerate(range(-180, 181)):
+        ax.view_init(elevation, angle)
+        filename = "isomap_{}".format(str(i).zfill(3))
+        filename = join(params["path pictures"],
+                        filename)
+        plt.savefig(filename)
+    # Creacion de la animacion
+    create_animation(params["path graphics"],
+                     params["path pictures"],
+                     params["file animation"],
+                     delete=False,
+                     fps=30)
+data.save_results(params["file results"])

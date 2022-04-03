@@ -64,10 +64,12 @@ def get_params() -> dict:
             "3D": {"components": 3},
         },
         "isomap": {
-            "2D": {"components": 2,
-                   "neighbors": [8, 10, 12, 14]},
-            "3D": {"components": 3,
-                   "neighbors": [8, 10, 12, 14]}
+            "neighbors": {8: {"elevation": 34},
+                          10: {"elevation": 34},
+                          12: {"elevation": 34},
+                          14: {"elevation": 34}},
+            "2D": {"components": 2},
+            "3D": {"components": 3}
         },
         "TSNE": {
             "perplexity": {
