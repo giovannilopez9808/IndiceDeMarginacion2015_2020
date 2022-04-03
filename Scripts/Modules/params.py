@@ -62,6 +62,16 @@ def get_params() -> dict:
             "3D": {"components": 3,
                    "neighbors": [8, 10, 12, 14]}
         },
+        "TSNE": {
+            "perplexity": {
+                100: {"elevation": 0},
+                200: {"elevation": 0},
+                300: {"elevation": 0},
+                400: {"elevation": 0}
+            },
+            "2D": {"components": 2},
+            "3D": {"components": 3}
+        },
     }
     # Verificación de la carpeta de resultados
     mkdir(params["path results"])

@@ -30,5 +30,7 @@ class isomap_model:
         self.results = self.model.transform(data)
 
     def get_results(self) -> array:
-        """"""
+        """
+        Resultados del la ejecucción del modelo
+        """
         return self.results.copy()

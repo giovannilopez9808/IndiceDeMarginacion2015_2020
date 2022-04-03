@@ -4,7 +4,6 @@ Analisis de los datos usando el método de isomap en el caso de dos dimensiones
 Genera una gráfica con la visualziacion de los puntos en 2D y guarda los eigenvalores resultantes en un archivo.
 """
 
-from sklearn import neighbors
 from Modules.data_model import data_class, join
 from Modules.params import get_params
 from Modules.isomap import isomap_model
