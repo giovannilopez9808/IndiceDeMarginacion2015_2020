@@ -2,7 +2,7 @@
 Clase que lee y organiza los datos para el guardado de los resultados y obtener diferentes parametros obtenidos del dataset. Las funciones que son para uso unico dentro de la clase tienen un guion bajo al inicio de su nombre
 """
 
-from pandas import DataFrame, read_csv
+from pandas import DataFrame, Series, read_csv
 from numpy import array, mean, std
 from os.path import join
 
@@ -136,6 +136,9 @@ class data_class:
         Obtiene el color de la clase seleccionada
         """
         return self.classes[classes]["color"]
+
+    def obtain_frecuency_clasees(self) -> Series:
+        return self.data_2020["GM"].value_counts()
 
     def add_results(self, data: array, names: list) -> None:
         """

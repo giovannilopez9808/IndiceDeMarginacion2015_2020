@@ -103,3 +103,12 @@ def get_params() -> dict:
 def mkdir(path) -> None:
     makedirs(path,
              exist_ok=True)
+
+
+def get_classes_colors(params: dict) -> list:
+    colors = []
+    for classes in params["classes"]:
+        data = params["classes"][classes]
+        color = data["color"]
+        colors += [color]
+    return colors
