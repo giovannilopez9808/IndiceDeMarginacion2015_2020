@@ -7,6 +7,7 @@ class results_model:
     def __init__(self, params: dict) -> None:
         self.params = params
         self.read()
+        self._get_id_class()
 
     def read(self) -> DataFrame:
         filename = join(self.params["path results"],
@@ -21,3 +22,15 @@ class results_model:
         filename = join(self.params["path results"],
                         filename)
         self.data.to_csv(filename)
+
+    def _get_id_class(self) -> None:
+        self.data["id"] = self.data["GM"].apply(lambda x:
+                                                self.params["classes"][x]["id"])
+
+    def get_id_labels(self) -> array:
+        id_labels = self.get_column_data("id")
+        return id_labels
+
+    def get_column_data(self, column_name: str) -> array:
+        data = self.data[column_name].to_numpy()
+        return data

@@ -23,6 +23,7 @@ def get_params() -> dict:
             "NOM_MUN"
         ],
         "embedding columns": [
+            'POB_TOT',
             'ANALF',
             'SBASC',
             'OVSDE',

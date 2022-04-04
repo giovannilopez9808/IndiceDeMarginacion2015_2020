@@ -11,7 +11,9 @@ class cluster_class():
         """
         Inicializa el modelo PCA dado el numero de componentes y el nombre del kernel
         """
-        self.model = AgglomerativeClustering(n_clusters=5)
+        self.model = AgglomerativeClustering(n_clusters=5,
+                                             linkage="complete",
+                                             affinity="cosine")
         self._generate_header_name()
 
     def run(self, data: array) -> None:

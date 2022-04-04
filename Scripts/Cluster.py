@@ -1,6 +1,6 @@
+from Modules.cluster_model import cluster_class
 from Modules.data_model import data_class
 from Modules.params import get_params
-from Modules.cluster import cluster_class
 
 params = get_params()
 params["file results"] = "Cluster.csv"
