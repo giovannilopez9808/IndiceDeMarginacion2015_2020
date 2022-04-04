@@ -88,6 +88,10 @@ def get_params() -> dict:
             "3D": {"components": 3,
                    "neighbors": [2, 3, 4, 6]}
         },
+        "Kmeans": {
+            "k-means++",
+            "random",
+        }
     }
     # Verificación de la carpeta de resultados
     mkdir(params["path results"])

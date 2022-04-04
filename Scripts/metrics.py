@@ -2,6 +2,7 @@ from Modules.metrics_model import metrics_class
 from Modules.results_model import results_model
 from Modules.cluster_model import cluster_class
 from Modules.data_model import data_class
+from Modules.kmeans import kmeans_model
 from Modules.params import get_params
 from Modules.som import SOM_model
 from pandas import DataFrame
@@ -17,7 +18,19 @@ datasets = {
             "filename": "Cluster.csv",
             "file graphics": "Cluster_confusion_matrix.png",
             "class": cluster_class,
-        }
+        },
+        "Kmeans++": {
+            "filename": "Kmeans.csv",
+            "file graphics": "Kmeans++_confusion_matrix.png",
+            "class": kmeans_model,
+            "label": "k-means++"
+        },
+        "Kmeans": {
+            "filename": "Kmeans.csv",
+            "file graphics": "Kmeans_random_confusion_matrix.png",
+            "class": kmeans_model,
+            "label": "random"
+        },
     }
 }
 
@@ -34,7 +47,10 @@ for model_name in datasets["Models"]:
     model_results = results_model(params)
     model = dataset["class"]
     model = model()
-    label = model.name[0]
+    if "Kmeans" in model_name:
+        label = dataset["label"]
+    else:
+        label = model.name[0]
     true_labels = model_results.get_id_labels()
     model_labels = model_results.get_column_data(label)
     results[model_name] = metrics.apply_all_metrics(true_labels,
