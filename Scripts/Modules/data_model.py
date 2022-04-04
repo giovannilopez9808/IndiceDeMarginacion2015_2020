@@ -138,6 +138,9 @@ class data_class:
         return self.classes[classes]["color"]
 
     def obtain_frecuency_clasees(self) -> Series:
+        """
+        Obtiene la frecuencia de cada clase de municipio
+        """
         return self.data_2020["GM"].value_counts()
 
     def add_results(self, data: array, names: list) -> None:
