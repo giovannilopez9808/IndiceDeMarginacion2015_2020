@@ -1,4 +1,3 @@
-from isort import file
 from Modules.params import get_params, get_classes_colors
 from matplotlib.container import BarContainer
 from Modules.data_model import data_class
