@@ -1,3 +1,6 @@
+from Modules.cluster_model import cluster_class
+from Modules.kmeans import kmeans_model
+from Modules.som import SOM_model
 from os import makedirs
 
 
@@ -98,6 +101,38 @@ def get_params() -> dict:
     # Verificación de la carpeta de las graficas
     mkdir(params["path graphics"])
     return params
+
+
+def get_metrics_params() -> dict:
+    datasets = {
+        "Models": {
+            "SOM": {
+                "filename": "SOM.csv",
+                "file graphics": "SOM_confusion_matrix.png",
+                "class": SOM_model,
+                "label": "SOM labels",
+            },
+            "Cluster": {
+                "filename": "Cluster.csv",
+                "file graphics": "Cluster_confusion_matrix.png",
+                "class": cluster_class,
+                "label": "Cluster labels",
+            },
+            "Kmeans++": {
+                "filename": "Kmeans.csv",
+                "file graphics": "Kmeans++_confusion_matrix.png",
+                "class": kmeans_model,
+                "label": "k-means++"
+            },
+            "Kmeans": {
+                "filename": "Kmeans.csv",
+                "file graphics": "Kmeans_random_confusion_matrix.png",
+                "class": kmeans_model,
+                "label": "random"
+            },
+        }
+    }
+    return datasets
 
 
 def mkdir(path) -> None:
