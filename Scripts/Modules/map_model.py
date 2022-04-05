@@ -1,7 +1,7 @@
 from geopandas import read_file, GeoDataFrame
+from .data_model import data_class, join
 from .params import get_classes_colors
 from matplotlib.lines import Line2D
-from .data_model import data_class
 import matplotlib.pyplot as plt
 
 
@@ -42,4 +42,6 @@ class map_model:
         ax.add_artist(leg_points)
         ax.axis("off")
         plt.tight_layout()
-        plt.savefig("test.png")
+        filename = join(self.params["path graphics"],
+                        self.params["file map"])
+        plt.savefig(filename)

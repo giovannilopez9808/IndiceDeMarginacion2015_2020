@@ -3,6 +3,7 @@ from Modules.map_model import map_model
 from Modules.params import get_params
 
 params = get_params()
+params["file map"] = "map.png"
 data = data_class(params)
 map = map_model(params)
 map.merge(data)
