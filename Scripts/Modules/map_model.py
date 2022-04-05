@@ -44,4 +44,5 @@ class map_model:
         plt.tight_layout()
         filename = join(self.params["path graphics"],
                         self.params["file map"])
-        plt.savefig(filename)
+        plt.savefig(filename,
+                    dpi=500)
