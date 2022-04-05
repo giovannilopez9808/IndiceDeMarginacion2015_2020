@@ -11,11 +11,12 @@ def get_params() -> dict:
     params = {
         # Direccion de los archivos de datos
         "path data": "../Data",
+        # Direccion con la informacion del mapa de México
+        "path map": "../Data/map",
         # Nombre de los daros de 1990 a 2015
         "file data 1990": "IMM_1990.csv",
         # Nombre de los datos de 2020
         "file data 2020": "IMM_2020.csv",
-        # Nombre del archivo de diccionario de siglas
         "file dictionary": "diccionario.csv",
         # Direccion de los archivos de resultados
         "path results": "../Results",
@@ -140,10 +141,10 @@ def mkdir(path) -> None:
              exist_ok=True)
 
 
-def get_classes_colors(params: dict) -> list:
-    colors = []
+def get_classes_colors(params: dict) -> dict:
+    colors = {}
     for classes in params["classes"]:
         data = params["classes"][classes]
         color = data["color"]
-        colors += [color]
+        colors[classes] = color
     return colors

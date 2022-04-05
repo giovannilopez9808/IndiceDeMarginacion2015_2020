@@ -61,6 +61,7 @@ class data_class:
         self._clean_data()
         self._classify_with_GM_column()
         self._obtain_embedding()
+        self._standarized_index_town()
         self._initialize_results_dataframe()
 
     def read_file(self, path: str, name: str, encoding: str) -> DataFrame:
@@ -117,6 +118,10 @@ class data_class:
         mu = mean(self.embedding, axis=0)
         sigma = std(self.embedding, axis=0)
         self.embedding = (self.embedding-mu)/sigma
+
+    def _standarized_index_town(self) -> DataFrame:
+        self.data_2020["CVE_MUN"] = self.data_2020["CVE_MUN"].astype(
+            str).str.zfill(5)
 
     def _initialize_results_dataframe(self) -> DataFrame:
         self.results = DataFrame()

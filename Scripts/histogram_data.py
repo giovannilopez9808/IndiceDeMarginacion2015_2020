@@ -27,7 +27,7 @@ frecuency = frecuency/frecuency.sum()
 plt.subplots(figsize=(10, 4))
 bars = plt.bar(frecuency.index,
                frecuency.values,
-               color=colors)
+               color=colors.values())
 autolabel(bars)
 plt.xlabel("Clasificación de los municipios")
 plt.ylabel("Frecuencia relativa")
