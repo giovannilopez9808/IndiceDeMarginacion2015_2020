@@ -70,17 +70,17 @@ def get_params() -> dict:
                    "file animation format": "PCA_3D_{}",
                    "file results": "PCA_3D.csv"},
         },
-        "isomap": {
+        "ISOMAP": {
             "neighbors": {8: {"elevation": 34},
                           10: {"elevation": 34},
                           12: {"elevation": 34},
                           14: {"elevation": 34}},
             "2D": {"components": 2,
-                   "file graphics": "isomap_2D.png",
-                   "file results": "isomap_2D.csv"},
+                   "file graphics": "ISOMAP_2D.png",
+                   "file results": "ISOMAP_2D.csv"},
             "3D": {"components": 3,
-                   "file graphics": "isomap_3D.png",
-                   "filenane": "isomap_3D.csv"},
+                   "file animation format": "ISOMAP_3D_{}",
+                   "file results": "ISOMAP_3D.csv"},
         },
         "TSNE": {
             "perplexity": {

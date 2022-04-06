@@ -4,17 +4,18 @@ Analisis de los datos usando el método de isomap en el caso de dos dimensiones
 Genera una gráfica con la visualziacion de los puntos en 2D y guarda los eigenvalores resultantes en un archivo.
 """
 
+from Modules.params import define_filenames_2D, get_params
 from Modules.data_model import data_class, join
-from Modules.params import get_params
 from Modules.isomap import isomap_model
 import matplotlib.pyplot as plt
 
 # Lectura de los parametros
 params = get_params()
-# isomap file results name
-params["file graphics"] = "ISOMAP_2D.png"
-# isomap file graphics name
-params["file results"] = "ISOMAP_2D.csv"
+model_name = "ISOMAP"
+# Definicion de los archivos resultantes
+params = define_filenames_2D(params,
+                             model_name)
+dataset = params[model_name]
 # Lectura de los datos
 data = data_class(params)
 # Inicializacion del modelo
@@ -23,9 +24,9 @@ isomap = isomap_model()
 # Resultados
 fig, axs = plt.subplots(2, 2, figsize=(12, 8))
 axs = axs.flatten()
-for ax, neighbor in zip(axs, params["isomap"]["neighbors"]):
+for ax, neighbor in zip(axs, dataset["neighbors"]):
     isomap.create(neighbor,
-                  params["isomap"]["2D"]["components"])
+                  dataset["2D"]["components"])
     isomap.run(data.embedding)
     vectors = isomap.get_results()
     data.add_results(vectors,
@@ -42,9 +43,10 @@ for ax, neighbor in zip(axs, params["isomap"]["neighbors"]):
                    c=color,
                    label=classes)
         ax.axis("off")
-plt.tight_layout(pad=3)
+plt.tight_layout(pad=4)
 handles, labels = ax.get_legend_handles_labels()
 fig.legend(handles, labels,
+           title="Índice de marginación",
            frameon=False,
            ncol=len(data.classes),
            bbox_to_anchor=(0.75, 1.01))

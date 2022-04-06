@@ -4,32 +4,35 @@ Analisis de los datos usando el método de isomap en el caso de dos dimensiones
 Genera una gráfica y animacion con la visualziacion de los puntos en 3D y guarda los eigenvectores resultantes en un archivo.
 """
 
+from Modules.params import get_params, mkdir, define_file_animation, define_filenames_3D
 from Modules.data_model import data_class, join
 from Modules.animation import create_animation
-from Modules.params import get_params, mkdir
 from Modules.isomap import isomap_model
 import matplotlib.pyplot as plt
 
 # Lectura de los parametros
 params = get_params()
-params["file results"] = "ISOMAP_3D.csv"
-# isomap file graphics name
+model_name = "ISOMAP"
+params = define_filenames_3D(params,
+                             model_name)
+dataset = params[model_name]
 # Lectura de los datos
 data = data_class(params)
 # Inicializacion del modelo
 isomap = isomap_model()
 # Resultados
-for neighbor in params["isomap"]["neighbors"]:
+for neighbor in dataset["neighbors"]:
     print("Analizando datos con neighbors = {}".format(neighbor))
     # Nombre y parametros del plot
-    params["file animation"] = "isomap_3D_{}".format(str(neighbor).zfill(2))
+    params["file animation"] = define_file_animation(dataset,
+                                                     neighbor)
     # isomap file results name
     params["path pictures"] = join(params["path graphics"],
                                    params["file animation"])
     mkdir(params["path pictures"])
-    elevation = params["isomap"]["neighbors"][neighbor]["elevation"]
+    elevation = dataset["neighbors"][neighbor]["elevation"]
     isomap.create(neighbor,
-                  params["isomap"]["3D"]["components"])
+                  dataset["3D"]["components"])
     # Calculo de isomap
     isomap.run(data.embedding)
     vectors = isomap.get_results()
@@ -50,6 +53,7 @@ for neighbor in params["isomap"]["neighbors"]:
                    label=classes)
     plt.axis("off")
     plt.legend(ncol=len(data.classes),
+               title="Índice de marginación",
                frameon=False,
                loc="upper center",
                fontsize=12)

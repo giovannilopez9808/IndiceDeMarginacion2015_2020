@@ -4,17 +4,18 @@ Analisis de los datos usando el método de LLE en el caso de dos dimensiones
 Genera una gráfica con la visualziacion de los puntos en 2D y guarda los eigenvalores resultantes en un archivo.
 """
 
+from Modules.params import define_filenames_2D, get_params
 from Modules.data_model import data_class, join
-from Modules.params import get_params
 from Modules.lle import LLE_model
 import matplotlib.pyplot as plt
 
 # Lectura de los parametros
 params = get_params()
-# LLE file results name
-params["file graphics"] = "LLE_2D.png"
-# LLE file graphics name
-params["file results"] = "LLE_2D.csv"
+model_name = "LLE"
+# Definicion de los archivos resultantes
+params = define_filenames_2D(params,
+                             model_name)
+dataset = params[model_name]
 # Lectura de los datos
 data = data_class(params)
 # Inicializacion del modelo
@@ -23,8 +24,8 @@ LLE = LLE_model()
 # Resultados
 fig, axs = plt.subplots(2, 2, figsize=(12, 8))
 axs = axs.flatten()
-for ax, neighbor in zip(axs, params["LLE"]["2D"]["neighbors"]):
-    LLE.create(params["LLE"]["2D"]["components"],
+for ax, neighbor in zip(axs, dataset["neighbors"]):
+    LLE.create(dataset["components"],
                neighbor)
     LLE.run(data.embedding)
     vectors = LLE.get_results()
@@ -42,9 +43,10 @@ for ax, neighbor in zip(axs, params["LLE"]["2D"]["neighbors"]):
                    c=color,
                    label=classes)
         ax.axis("off")
-plt.tight_layout(pad=3)
+plt.tight_layout(pad=4)
 handles, labels = ax.get_legend_handles_labels()
 fig.legend(handles, labels,
+           title="Índice de marginación",
            frameon=False,
            ncol=len(data.classes),
            bbox_to_anchor=(0.75, 1.01))

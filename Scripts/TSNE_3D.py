@@ -61,7 +61,7 @@ for perplexity in dataset["perplexity"]:
     # Guardado de cada angulo
     for i, angle in enumerate(range(-180, 181)):
         ax.view_init(elevation, angle)
-        filename = "isomap_{}".format(str(i).zfill(3))
+        filename = "TSNE_{}".format(str(i).zfill(3))
         filename = join(params["path pictures"],
                         filename)
         plt.savefig(filename)
