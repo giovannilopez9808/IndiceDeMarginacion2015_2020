@@ -4,31 +4,34 @@ Analisis de los datos usando el método de isomap en el caso de dos dimensiones
 Genera una gráfica y animacion con la visualziacion de los puntos en 3D y guarda los eigenvectores resultantes en un archivo.
 """
 
+from Modules.params import get_params, mkdir, define_file_animation, define_filenames_3D
 from Modules.data_model import data_class, join
 from Modules.animation import create_animation
-from Modules.params import get_params, mkdir
 from Modules.tsne import TSNE_model
 import matplotlib.pyplot as plt
 
 # Lectura de los parametros
 params = get_params()
-params["file results"] = "TSNE_3D.csv"
-# isomap file graphics name
+model_name = "TSNE"
+params = define_filenames_3D(params,
+                             model_name)
+dataset = params[model_name]
 # Lectura de los datos
 data = data_class(params)
 # Inicializacion del modelo
 tsne = TSNE_model()
 # Resultados
-for perplexity in params["TSNE"]["perplexity"]:
+for perplexity in dataset["perplexity"]:
     print("Analizando datos con perplexitys = {}".format(perplexity))
     # Nombre y parametros del plot
-    params["file animation"] = "tsne_3D_{}".format(str(perplexity).zfill(2))
+    params["file animation"] = define_file_animation(dataset,
+                                                     perplexity)
     # tsne file results name
     params["path pictures"] = join(params["path graphics"],
                                    params["file animation"])
     mkdir(params["path pictures"])
-    elevation = params["TSNE"]["perplexity"][perplexity]["elevation"]
-    tsne.create(params["TSNE"]["3D"]["components"],
+    elevation = dataset["perplexity"][perplexity]["elevation"]
+    tsne.create(dataset["3D"]["components"],
                 perplexity)
     # Calculo de tsne
     tsne.run(data.embedding)
@@ -50,6 +53,7 @@ for perplexity in params["TSNE"]["perplexity"]:
                    label=classes)
     plt.axis("off")
     plt.legend(ncol=len(data.classes),
+               title="Índice de marginación",
                frameon=False,
                loc="upper center",
                fontsize=12)

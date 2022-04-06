@@ -4,9 +4,9 @@ Analisis de los datos usando el método de PCA en el caso de dos dimensiones
 Genera una gráfica y animacion con la visualziacion de los puntos en 3D y guarda los eigenvectores resultantes en un archivo.
 """
 
+from Modules.params import define_file_animation, define_filenames_3D, get_params, mkdir
 from Modules.data_model import data_class, join
 from Modules.animation import create_animation
-from Modules.params import define_file_animation, define_filenames_3D, get_params, mkdir
 from Modules.pca import PCA_model
 import matplotlib.pyplot as plt
 

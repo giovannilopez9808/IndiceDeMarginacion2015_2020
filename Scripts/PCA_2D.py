@@ -4,9 +4,8 @@ Analisis de los datos usando el método de PCA en el caso de dos dimensiones
 Genera una gráfica con la visualziacion de los puntos en 2D y guarda los eigenvalores resultantes en un archivo.
 """
 
-from dataclasses import dataclass
-from Modules.data_model import data_class, join
 from Modules.params import define_filenames_2D, get_params
+from Modules.data_model import data_class, join
 from Modules.pca import PCA_model
 import matplotlib.pyplot as plt
 
@@ -21,13 +20,13 @@ dataset = params[model_name]
 data = data_class(params)
 # Inicializacion del modelo
 pca = PCA_model()
-# Calculo de PCA
 # Resultados
 fig, axs = plt.subplots(2, 2, figsize=(12, 8))
 axs = axs.flatten()
 for ax, kernel in zip(axs, dataset["kernels"]):
     pca.create(dataset["2D"]["components"],
                kernel)
+    # Calculo de PCA
     pca.run(data.embedding)
     vectors = pca.get_eigenvectors()
     data.add_results(vectors,

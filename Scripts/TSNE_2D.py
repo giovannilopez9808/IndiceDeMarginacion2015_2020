@@ -4,28 +4,29 @@ Analisis de los datos usando el método de TSNE en el caso de dos dimensiones
 Genera una gráfica con la visualziacion de los puntos en 2D y guarda los eigenvalores resultantes en un archivo.
 """
 
+from Modules.params import define_filenames_2D, get_params
 from Modules.data_model import data_class, join
-from Modules.params import get_params
 from Modules.tsne import TSNE_model
 import matplotlib.pyplot as plt
 
 # Lectura de los parametros
 params = get_params()
-# tsne file results name
-params["file graphics"] = "TSNE_2D.png"
-# tsne file graphics name
-params["file results"] = "TSNE_2D.csv"
+model_name = "TSNE"
+# Definicion de los archivos resultantes
+params = define_filenames_2D(params,
+                             model_name)
+dataset = params[model_name]
 # Lectura de los datos
 data = data_class(params)
 # Inicializacion del modelo
 tsne = TSNE_model()
-# Calculo de tsne
 # Resultados
 fig, axs = plt.subplots(2, 2, figsize=(12, 8))
 axs = axs.flatten()
-for ax, perplexity in zip(axs, params["TSNE"]["perplexity"]):
-    tsne.create(params["TSNE"]["2D"]["components"],
+for ax, perplexity in zip(axs, dataset["perplexity"]):
+    tsne.create(dataset["2D"]["components"],
                 perplexity)
+    # Calculo de tsne
     tsne.run(data.embedding)
     vectors = tsne.get_results()
     data.add_results(vectors,
@@ -42,12 +43,13 @@ for ax, perplexity in zip(axs, params["TSNE"]["perplexity"]):
                    c=color,
                    label=classes)
         ax.axis("off")
-plt.tight_layout(pad=3)
 handles, labels = ax.get_legend_handles_labels()
 fig.legend(handles, labels,
+           title="Índice de marginación",
            frameon=False,
            ncol=len(data.classes),
            bbox_to_anchor=(0.75, 1.01))
+plt.tight_layout(pad=4)
 # Guardado de cada grafica
 filename = join(params["path graphics"],
                 params["file graphics"])

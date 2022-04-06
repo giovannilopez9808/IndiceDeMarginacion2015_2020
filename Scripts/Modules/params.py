@@ -90,16 +90,18 @@ def get_params() -> dict:
                 400: {"elevation": 0}
             },
             "2D": {"components": 2,
-                   "filenane": "TSNE_2D.csv"},
+                   "file results": "TSNE_2D.csv",
+                   "file graphics": "TSNE_2D.png"},
             "3D": {"components": 3,
-                   "filenane": "TSNE_3D.csv"},
+                   "file animation format": "TSNE_3D_{}",
+                   "file results": "TSNE_3D.csv"},
         },
-        "LLE": {
+        "LLE":
+        {
+            "neighbors": [4, 5, 6, 7],
             "2D": {"components": 2,
-                   "neighbors": [4, 5, 6, 7],
                    "filenane": "LLE_2D.csv"},
             "3D": {"components": 3,
-                   "neighbors": [2, 3, 4, 6],
                    "filenane": "LLE_3D.csv"},
         },
         "Kmeans": {
