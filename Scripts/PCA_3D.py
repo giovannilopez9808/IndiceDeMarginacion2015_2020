@@ -6,29 +6,33 @@ Genera una gráfica y animacion con la visualziacion de los puntos en 3D y guard
 
 from Modules.data_model import data_class, join
 from Modules.animation import create_animation
-from Modules.params import get_params, mkdir
+from Modules.params import define_file_animation, define_filenames_3D, get_params, mkdir
 from Modules.pca import PCA_model
 import matplotlib.pyplot as plt
 
 # Lectura de los parametros
 params = get_params()
-params["file results"] = "PCA_3D.csv"
+model_name = "PCA"
+params = define_filenames_3D(params,
+                             model_name)
+dataset = params[model_name]
 # PCA file graphics name
 # Lectura de los datos
 data = data_class(params)
 # Inicializacion del modelo
 pca = PCA_model()
 # Resultados
-for kernel in params["PCA"]["kernels"]:
+for kernel in dataset["kernels"]:
     print("Analizando datos con kernel {}".format(kernel))
     # Nombre y parametros del plot
-    params["file animation"] = "PCA_3D_{}".format(kernel)
+    params["file animation"] = define_file_animation(dataset,
+                                                     kernel)
     # PCA file results name
     params["path pictures"] = join(params["path graphics"],
                                    params["file animation"])
     mkdir(params["path pictures"])
-    elevation = params["PCA"]["kernels"][kernel]["elevation"]
-    pca.create(params["PCA"]["3D"]["components"],
+    elevation = dataset["kernels"][kernel]["elevation"]
+    pca.create(dataset["3D"]["components"],
                kernel)
     # Calculo de PCA
     pca.run(data.embedding)
@@ -50,6 +54,7 @@ for kernel in params["PCA"]["kernels"]:
                    label=classes)
     plt.axis("off")
     plt.legend(ncol=len(data.classes),
+               title="Índice de marginación",
                frameon=False,
                loc="upper center",
                fontsize=12)
