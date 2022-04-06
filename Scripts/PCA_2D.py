@@ -4,17 +4,19 @@ Analisis de los datos usando el método de PCA en el caso de dos dimensiones
 Genera una gráfica con la visualziacion de los puntos en 2D y guarda los eigenvalores resultantes en un archivo.
 """
 
+from dataclasses import dataclass
 from Modules.data_model import data_class, join
-from Modules.params import get_params
+from Modules.params import define_filenames_2D, get_params
 from Modules.pca import PCA_model
 import matplotlib.pyplot as plt
 
 # Lectura de los parametros
 params = get_params()
-# PCA file results name
-params["file graphics"] = "PCA_2D.png"
-# PCA file graphics name
-params["file results"] = "PCA_2D.csv"
+model_name = "PCA"
+# Definicion de los archivos resultantes
+params = define_filenames_2D(params,
+                             model_name)
+dataset = params[model_name]
 # Lectura de los datos
 data = data_class(params)
 # Inicializacion del modelo
@@ -23,8 +25,8 @@ pca = PCA_model()
 # Resultados
 fig, axs = plt.subplots(2, 2, figsize=(12, 8))
 axs = axs.flatten()
-for ax, kernel in zip(axs, params["PCA"]["kernels"]):
-    pca.create(params["PCA"]["2D"]["components"],
+for ax, kernel in zip(axs, dataset["kernels"]):
+    pca.create(dataset["2D"]["components"],
                kernel)
     pca.run(data.embedding)
     vectors = pca.get_eigenvectors()
@@ -42,12 +44,13 @@ for ax, kernel in zip(axs, params["PCA"]["kernels"]):
                    c=color,
                    label=classes)
         ax.axis("off")
-plt.tight_layout(pad=3)
 handles, labels = ax.get_legend_handles_labels()
 fig.legend(handles, labels,
+           title="Índice de marginación",
            frameon=False,
            ncol=len(data.classes),
-           bbox_to_anchor=(0.75, 1.01))
+           bbox_to_anchor=(0.75, 1))
+plt.tight_layout(pad=4)
 # Guardado de cada grafica
 filename = join(params["path graphics"],
                 params["file graphics"])
