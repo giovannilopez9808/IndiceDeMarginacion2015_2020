@@ -36,6 +36,7 @@ class map_model:
                          for color in colors.values()]
         leg_points = ax.legend(custom_points,
                                colors.keys(),
+                               title="Índice de marginación",
                                frameon=False,
                                ncol=5,
                                loc=(0.3, 0.96))
