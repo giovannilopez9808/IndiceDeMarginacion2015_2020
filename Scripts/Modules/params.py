@@ -40,19 +40,19 @@ def get_params() -> dict:
         ],
         "classes": {
             'Muy bajo': {"id": 0,
-                         "color": "#03045e",
+                         "color": "#b7094c",
                          },
             'Bajo': {"id": 1,
-                     "color": "#0077b6",
+                     "color": "#892b64",
                      },
             'Medio': {"id": 2,
-                      "color": "#00b4d8",
+                      "color": "#5c4d7d",
                       },
             'Alto': {"id": 3,
-                     "color": "#90e0ef",
+                     "color": "#2e6f95",
                      },
             'Muy alto': {"id": 4,
-                         "color": "#caf0f8",
+                         "color": "#0091ad",
                          },
         },
         # Parametros para el método de PCA
@@ -63,16 +63,24 @@ def get_params() -> dict:
                 "cosine": {"elevation": 0},
                 "sigmoid": {"elevation": 0}
             },
-            "2D": {"components": 2},
-            "3D": {"components": 3},
+            "2D": {"components": 2,
+                   "file results": "PCA_2D.csv",
+                   "file graphics": "PCA_2D.png"},
+            "3D": {"components": 3,
+                   "file animation format": "PCA_3D_{}",
+                   "file results": "PCA_3D.csv"},
         },
         "isomap": {
             "neighbors": {8: {"elevation": 34},
                           10: {"elevation": 34},
                           12: {"elevation": 34},
                           14: {"elevation": 34}},
-            "2D": {"components": 2},
-            "3D": {"components": 3}
+            "2D": {"components": 2,
+                   "file graphics": "isomap_2D.png",
+                   "file results": "isomap_2D.csv"},
+            "3D": {"components": 3,
+                   "file graphics": "isomap_3D.png",
+                   "filenane": "isomap_3D.csv"},
         },
         "TSNE": {
             "perplexity": {
@@ -81,14 +89,18 @@ def get_params() -> dict:
                 300: {"elevation": 0},
                 400: {"elevation": 0}
             },
-            "2D": {"components": 2},
-            "3D": {"components": 3}
+            "2D": {"components": 2,
+                   "filenane": "TSNE_2D.csv"},
+            "3D": {"components": 3,
+                   "filenane": "TSNE_3D.csv"},
         },
         "LLE": {
             "2D": {"components": 2,
-                   "neighbors": [4, 5, 6, 7]},
+                   "neighbors": [4, 5, 6, 7],
+                   "filenane": "LLE_2D.csv"},
             "3D": {"components": 3,
-                   "neighbors": [2, 3, 4, 6]}
+                   "neighbors": [2, 3, 4, 6],
+                   "filenane": "LLE_3D.csv"},
         },
         "Kmeans": {
             "k-means++",
@@ -157,3 +169,24 @@ def _define_SOM_colors(params: dict) -> dict:
         color = dataset["color"]
         colors[id] = color
     return colors
+
+
+def define_filenames_2D(params: dict, model: str) -> dict:
+    params["file graphics"] = params[model]["2D"]["file graphics"]
+    params = define_file_results(params, model, "2D")
+    return params
+
+
+def define_filenames_3D(params: dict, model: str) -> dict:
+    params = define_file_results(params, model, "3D")
+    return params
+
+
+def define_file_results(params: dict, model: str, dim: str) -> dict:
+    params["file results"] = params[model][dim]["file results"]
+    return params
+
+
+def define_file_animation(dataset: dict, param: str) -> str:
+    filename = dataset["3D"]["file animation format"].format(param)
+    return filename
