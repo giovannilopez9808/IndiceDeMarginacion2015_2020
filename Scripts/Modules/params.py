@@ -55,13 +55,6 @@ def get_params() -> dict:
                          "color": "#caf0f8",
                          },
         },
-        "SOM colors": {
-            0: "#ef476f",
-            1: "#ffd166",
-            2: "#06d6a0",
-            3: "#118ab2",
-            4: "#f3722c",
-        },
         # Parametros para el método de PCA
         "PCA": {
             "kernels": {
@@ -102,6 +95,7 @@ def get_params() -> dict:
             "random",
         }
     }
+    params["SOM colors"] = _define_SOM_colors(params)
     # Verificación de la carpeta de resultados
     mkdir(params["path results"])
     # Verificación de la carpeta de las graficas
@@ -152,4 +146,14 @@ def get_classes_colors(params: dict) -> dict:
         data = params["classes"][classes]
         color = data["color"]
         colors[classes] = color
+    return colors
+
+
+def _define_SOM_colors(params: dict) -> dict:
+    colors = {}
+    for classes in params["classes"]:
+        dataset = params["classes"][classes]
+        id = dataset["id"]
+        color = dataset["color"]
+        colors[id] = color
     return colors
