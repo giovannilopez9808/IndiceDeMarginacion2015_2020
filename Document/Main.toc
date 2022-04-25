@@ -1,7 +1,7 @@
 \babel@toc {spanish}{}
 \contentsline {section}{\numberline {1}Introducción}{1}{section.1}%
-\contentsline {section}{\numberline {2}Marco teorico}{1}{section.2}%
-\contentsline {section}{\numberline {3}Materiales}{1}{section.3}%
-\contentsline {section}{\numberline {4}Resultados}{1}{section.4}%
-\contentsline {section}{\numberline {5}Conclusiones}{1}{section.5}%
-\contentsline {section}{\numberline {6}Referencias}{1}{section.6}%
+\contentsline {section}{\numberline {2}Marco teorico}{2}{section.2}%
+\contentsline {section}{\numberline {3}Materiales}{2}{section.3}%
+\contentsline {section}{\numberline {4}Resultados}{2}{section.4}%
+\contentsline {section}{\numberline {5}Conclusiones}{2}{section.5}%
+\contentsline {section}{\numberline {6}Referencias}{2}{section.6}%
