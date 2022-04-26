@@ -15,7 +15,7 @@ class map_model:
         self.data = self.data.rename(columns={"CLAVE": "CVE_MUN"})
 
     def merge(self, data: data_class) -> GeoDataFrame:
-        self.data = self.data.merge(data.data_2020, on="CVE_MUN")
+        self.data = self.data.merge(data.data, on="CVE_MUN")
 
     def plot_GM(self) -> None:
         colors = get_classes_colors(self.params)

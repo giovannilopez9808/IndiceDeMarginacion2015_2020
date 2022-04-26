@@ -10,18 +10,18 @@ def get_params() -> dict:
     """
     params = {
         # Direccion de los archivos de datos
-        "path data": "../Data",
+        "path data": "../../Data",
         # Direccion con la informacion del mapa de México
-        "path map": "../Data/map",
+        "path map": "../../Data/map",
         # Nombre de los daros de 1990 a 2015
         "file data 1990": "IMM_1990.csv",
         # Nombre de los datos de 2020
         "file data 2020": "IMM_2020.csv",
         "file dictionary": "diccionario.csv",
         # Direccion de los archivos de resultados
-        "path results": "../Results",
+        "path results": "../../Results",
         # Direccion de las graficas
-        "path graphics": "../Graphics",
+        "path graphics": "../../Graphics/Data_2020",
         "useless columns": [
             "NOM_ENT",
             "NOM_MUN"

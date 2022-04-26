@@ -48,14 +48,14 @@ class data_class:
 
     def read_data(self) -> DataFrame:
         """
-        Lectura de los archivos de datos de 1990 a 2020
+        Lectura de los archivos de datos de 2020
         """
-        self.data_1990 = self.read_file(self.params["path data"],
-                                        self.params["file data 1990"],
-                                        "latin-1")
-        self.data_2020 = self.read_file(self.params["path data"],
-                                        self.params["file data 2020"],
-                                        "utf-8")
+        # self.data_1990 = self.read_file(self.params["path data"],
+        #                                 self.params["file data 1990"],
+        #                                 "latin-1")
+        self.data = self.read_file(self.params["path data"],
+                                   self.params["file data 2020"],
+                                   "utf-8")
         self._obtain_index_town()
         self._obtain_index_state()
         self._clean_data()
@@ -75,7 +75,7 @@ class data_class:
         return data
 
     def _classify_with_GM_column(self) -> None:
-        self.data_2020["classes"] = self.data_2020["GM"].apply(
+        self.data["classes"] = self.data["GM"].apply(
             lambda x: self.classes[x]["id"])
 
     def _obtain_index_town(self) -> dict:
@@ -83,9 +83,9 @@ class data_class:
         Creacion de un diccionario del nombre de cada municipio
         """
         index_town = {}
-        for i in self.data_2020.index:
-            index = self.data_2020["CVE_MUN"][i]
-            town = self.data_2020["NOM_MUN"][i]
+        for i in self.data.index:
+            index = self.data["CVE_MUN"][i]
+            town = self.data["NOM_MUN"][i]
             index_town[index] = town
         self.index_town = index_town
 
@@ -94,9 +94,9 @@ class data_class:
         Creacion de un diccionario del nombre de cada estado
         """
         index_state = {}
-        for i in self.data_2020.index:
-            index = self.data_2020["CVE_ENT"][i]
-            state = self.data_2020["NOM_ENT"][i]
+        for i in self.data.index:
+            index = self.data["CVE_ENT"][i]
+            state = self.data["NOM_ENT"][i]
             index_state[index] = state
         self.index_state = index_state
 
@@ -104,8 +104,8 @@ class data_class:
         """
         Limpieza de las columnas que no seran utilizadas
         """
-        self.data_1990 = self.data_1990.drop(columns=self._useless_colums)
-        self.data_2020 = self.data_2020.drop(columns=self._useless_colums)
+        # self.data_1990 = self.data_1990.drop(columns=self._useless_colums)
+        self.data = self.data.drop(columns=self._useless_colums)
 
     def _obtain_embedding(self) -> array:
         """
@@ -113,28 +113,28 @@ class data_class:
         """
         embedding = DataFrame()
         for column in self._embedding_columns:
-            embedding[column] = self.data_2020[column]
+            embedding[column] = self.data[column]
         self.embedding = embedding.to_numpy()
         mu = mean(self.embedding, axis=0)
         sigma = std(self.embedding, axis=0)
         self.embedding = (self.embedding-mu)/sigma
 
     def _standarized_index_town(self) -> DataFrame:
-        self.data_2020["CVE_MUN"] = self.data_2020["CVE_MUN"].astype(
+        self.data["CVE_MUN"] = self.data["CVE_MUN"].astype(
             str).str.zfill(5)
 
     def _initialize_results_dataframe(self) -> DataFrame:
         self.results = DataFrame()
-        self.results["CVE_MUN"] = self.data_2020["CVE_MUN"]
-        self.results["GM"] = self.data_2020["GM"]
-        self.results["IM"] = self.data_2020["IM"]
-        self.results["IMN"] = self.data_2020["IMN"]
+        self.results["CVE_MUN"] = self.data["CVE_MUN"]
+        self.results["GM"] = self.data["GM"]
+        self.results["IM"] = self.data["IM"]
+        self.results["IMN"] = self.data["IMN"]
 
     def obtain_index_data_for_class(self, classes: str) -> DataFrame:
         """
         Obtiene los indices de la clase de dato seleccionada
         """
-        return self.data_2020["GM"] == classes
+        return self.data["GM"] == classes
 
     def obtain_color_classes(self, classes: str) -> str:
         """
@@ -146,7 +146,7 @@ class data_class:
         """
         Obtiene la frecuencia de cada clase de municipio
         """
-        return self.data_2020["GM"].value_counts()
+        return self.data["GM"].value_counts()
 
     def add_results(self, data: array, names: list) -> None:
         """
