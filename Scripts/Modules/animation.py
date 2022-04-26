@@ -9,7 +9,8 @@ def create_animation(path: str, path_pictures: str, name: str, delete: bool, fps
     Funcion que ejecuta la creacion de la animacion
     """
     filenames = sorted(ls(path_pictures))
-    filenames = [join(path_pictures, filename) for filename in filenames]
+    filenames = [join(path_pictures, filename)
+                 for filename in filenames]
     output_file = "{}.mp4".format(name)
     output_file = join(path, output_file)
     movie = Movie_maker.ImageSequenceClip(filenames,
