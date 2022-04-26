@@ -50,12 +50,8 @@ class data_class:
         """
         Lectura de los archivos de datos de 2020
         """
-        # self.data_1990 = self.read_file(self.params["path data"],
-        #                                 self.params["file data 1990"],
-        #                                 "latin-1")
         self.data = self.read_file(self.params["path data"],
-                                   self.params["file data 2020"],
-                                   "utf-8")
+                                   self.params["file CONAPO data"])
         self._obtain_index_town()
         self._obtain_index_state()
         self._clean_data()
@@ -77,6 +73,9 @@ class data_class:
     def _classify_with_GM_column(self) -> None:
         self.data["classes"] = self.data["GM"].apply(
             lambda x: self.classes[x]["id"])
+
+    def _only_2015(self) -> DataFrame:
+        self.data = self.data[self.data["AÑO"] == 2015]
 
     def _obtain_index_town(self) -> dict:
         """

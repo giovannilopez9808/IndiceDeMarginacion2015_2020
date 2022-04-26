@@ -1,27 +1,28 @@
 from Modules.cluster_model import cluster_class
 from Modules.kmeans import kmeans_model
 from Modules.som import SOM_model
+from os.path import join
 from os import makedirs
 
 
-def get_params() -> dict:
+def get_params(year: int) -> dict:
     """
     Definicion de las rutas y nombres de los archivos de datos
     """
     params = {
         # Direccion de los archivos de datos
-        "path data": "../../Data",
+        "path data": "../Data",
         # Direccion con la informacion del mapa de México
-        "path map": "../../Data/map",
+        "path map": "../Data/map",
         # Nombre de los daros de 1990 a 2015
         "file data 1990": "IMM_1990.csv",
         # Nombre de los datos de 2020
         "file data 2020": "IMM_2020.csv",
         "file dictionary": "diccionario.csv",
         # Direccion de los archivos de resultados
-        "path results": "../../Results",
+        "path results": "../Results",
         # Direccion de las graficas
-        "path graphics": "../../Graphics/Data_2020",
+        "path graphics": "../Graphics",
         "useless columns": [
             "NOM_ENT",
             "NOM_MUN"
@@ -110,6 +111,10 @@ def get_params() -> dict:
         }
     }
     params["SOM colors"] = _define_SOM_colors(params)
+    params["file CONAPO data"] = _define_CONAPO_data(params,
+                                                     year)
+    params = _define_year_folders(params,
+                                  year)
     # Verificación de la carpeta de resultados
     mkdir(params["path results"])
     # Verificación de la carpeta de las graficas
@@ -161,6 +166,21 @@ def get_classes_colors(params: dict) -> dict:
         color = data["color"]
         colors[classes] = color
     return colors
+
+
+def _define_year_folders(params: dict, year: int) -> dict:
+    folder = "Data_{}".format(year)
+
+    params["path graphics"] = join(params["path graphics"],
+                                   folder)
+    params["path results"] = join(params["path results"],
+                                  folder)
+    return params
+
+
+def _define_CONAPO_data(params: dict, year: int) -> str:
+    label = "file data {}".format(year)
+    return params[label]
 
 
 def _define_SOM_colors(params: dict) -> dict:
