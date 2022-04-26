@@ -52,6 +52,8 @@ class data_class:
         """
         self.data = self.read_file(self.params["path data"],
                                    self.params["file CONAPO data"])
+        if "1990" in self.params["file CONAPO data"]:
+            self._only_2015()
         self._obtain_index_town()
         self._obtain_index_state()
         self._clean_data()
@@ -60,14 +62,13 @@ class data_class:
         self._standarized_index_town()
         self._initialize_results_dataframe()
 
-    def read_file(self, path: str, name: str, encoding: str) -> DataFrame:
+    def read_file(self, path: str, name: str) -> DataFrame:
         """
         Lectura estandarizada de los datos
         """
         filename = join(path,
                         name)
-        data = read_csv(filename,
-                        encoding=encoding,)
+        data = read_csv(filename)
         return data
 
     def _classify_with_GM_column(self) -> None:
@@ -76,6 +77,7 @@ class data_class:
 
     def _only_2015(self) -> DataFrame:
         self.data = self.data[self.data["AÑO"] == 2015]
+        self.data = self.data.drop(columns="AÑO")
 
     def _obtain_index_town(self) -> dict:
         """
@@ -127,7 +129,7 @@ class data_class:
         self.results["CVE_MUN"] = self.data["CVE_MUN"]
         self.results["GM"] = self.data["GM"]
         self.results["IM"] = self.data["IM"]
-        self.results["IMN"] = self.data["IMN"]
+        # self.results["IMN"] = self.data["IMN"]
 
     def obtain_index_data_for_class(self, classes: str) -> DataFrame:
         """

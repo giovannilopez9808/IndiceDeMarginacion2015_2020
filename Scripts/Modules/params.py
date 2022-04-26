@@ -15,7 +15,7 @@ def get_params(year: int) -> dict:
         # Direccion con la informacion del mapa de México
         "path map": "../Data/map",
         # Nombre de los daros de 1990 a 2015
-        "file data 1990": "IMM_1990.csv",
+        "file data 2015": "IMM_1990.csv",
         # Nombre de los datos de 2020
         "file data 2020": "IMM_2020.csv",
         "file dictionary": "diccionario.csv",
@@ -28,7 +28,6 @@ def get_params(year: int) -> dict:
             "NOM_MUN"
         ],
         "embedding columns": [
-            'POB_TOT',
             'ANALF',
             'SBASC',
             'OVSDE',
@@ -138,13 +137,13 @@ def get_metrics_params() -> dict:
                 "label": "Cluster labels",
             },
             "Kmeans++": {
-                "filename": "Kmeans.csv",
+                "filename": "kmeans_k-means++.csv",
                 "file graphics": "Kmeans++_confusion_matrix.png",
                 "class": kmeans_model,
                 "label": "k-means++"
             },
             "Kmeans": {
-                "filename": "Kmeans.csv",
+                "filename": "kmeans_random.csv",
                 "file graphics": "Kmeans_random_confusion_matrix.png",
                 "class": kmeans_model,
                 "label": "random"

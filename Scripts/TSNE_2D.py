@@ -9,50 +9,54 @@ from Modules.data_model import data_class, join
 from Modules.tsne import TSNE_model
 import matplotlib.pyplot as plt
 
-# Lectura de los parametros
-params = get_params()
-model_name = "TSNE"
-# Definicion de los archivos resultantes
-params = define_filenames_2D(params,
-                             model_name)
-dataset = params[model_name]
-# Lectura de los datos
-data = data_class(params)
-# Inicializacion del modelo
-tsne = TSNE_model()
-# Resultados
-fig, axs = plt.subplots(2, 2, figsize=(12, 8))
-axs = axs.flatten()
-for ax, perplexity in zip(axs, dataset["perplexity"]):
-    tsne.create(dataset["2D"]["components"],
-                perplexity)
-    # Calculo de tsne
-    tsne.run(data.embedding)
-    vectors = tsne.get_results()
-    data.add_results(vectors,
-                     tsne.names)
-    # Ploteo de cada clase
-    ax.set_title("perplexitys = {}".format(perplexity))
-    for classes in data.classes:
-        index = data.obtain_index_data_for_class(classes)
-        color = data.obtain_color_classes(classes)
-        subset = vectors[index]
-        ax.scatter(subset[:, 0],
-                   subset[:, 1],
-                   alpha=0.5,
-                   c=color,
-                   label=classes)
-        ax.axis("off")
-handles, labels = ax.get_legend_handles_labels()
-fig.legend(handles, labels,
-           title="Índice de marginación",
-           frameon=False,
-           ncol=len(data.classes),
-           bbox_to_anchor=(0.75, 1.01))
-plt.tight_layout(pad=4)
-# Guardado de cada grafica
-filename = join(params["path graphics"],
-                params["file graphics"])
-plt.savefig(filename,
-            dpi=300)
-data.save_results(params["file results"])
+years = [2015, 2020]
+for year in years:
+    print("-"*30)
+    print("Analizando año {}".format(year))
+    # Lectura de los parametros
+    params = get_params(year)
+    model_name = "TSNE"
+    # Definicion de los archivos resultantes
+    params = define_filenames_2D(params,
+                                 model_name)
+    dataset = params[model_name]
+    # Lectura de los datos
+    data = data_class(params)
+    # Inicializacion del modelo
+    tsne = TSNE_model()
+    # Resultados
+    fig, axs = plt.subplots(2, 2, figsize=(12, 8))
+    axs = axs.flatten()
+    for ax, perplexity in zip(axs, dataset["perplexity"]):
+        tsne.create(dataset["2D"]["components"],
+                    perplexity)
+        # Calculo de tsne
+        tsne.run(data.embedding)
+        vectors = tsne.get_results()
+        data.add_results(vectors,
+                         tsne.names)
+        # Ploteo de cada clase
+        ax.set_title("perplexitys = {}".format(perplexity))
+        for classes in data.classes:
+            index = data.obtain_index_data_for_class(classes)
+            color = data.obtain_color_classes(classes)
+            subset = vectors[index]
+            ax.scatter(subset[:, 0],
+                       subset[:, 1],
+                       alpha=0.5,
+                       c=color,
+                       label=classes)
+            ax.axis("off")
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(handles, labels,
+               title="Índice de marginación",
+               frameon=False,
+               ncol=len(data.classes),
+               bbox_to_anchor=(0.75, 1.01))
+    plt.tight_layout(pad=4)
+    # Guardado de cada grafica
+    filename = join(params["path graphics"],
+                    params["file graphics"])
+    plt.savefig(filename,
+                dpi=300)
+    data.save_results(params["file results"])
