@@ -27,25 +27,7 @@ El IM utiliza como indicadores\cite{CONAPO_2022} los siguientes porcentajes:
 
 Para estimar los índices de marginación se utiliza el método de distancia $P_2$\cite{Trapero_1977} ($DP_2$). El método de distancia $P_2$ fue desarrollado para hacer comparaciones temporales y espaciales. Ha sido aplciado en investigaciones sobre la calidad de vida en la Unión Europea y España\cite{Somarriba_2008,Zarzoza_2012,Zarzoza_1996,Nayak_2012}. La base del método es tener una base de referencia. Los valores de referencia pueden conformarse por los mínimos o máximos para todas los indicadores o para cada indicador. Estos valores no tienen que ser necesariamente reales. Si se toman los valores mínimos, entonces el indicador de $DP_2$ tiene valores altos cuando existen mejores condiciones socioeconomicas. La base de referencia a nivel municipal para el periodo 2010-2020 se muestra en la tabla \ref{table:base_de_referencia}\cite{CONAPO_2022}. El $DP_2$ evita la duplicación de información y imparcialidad en el esquema de ponderación. Además de esto contiene las siguientes propiedades matemáticas: existencia, determinación monotonía, unicidad, invarianza frente a la base de referencia, homogeneidad, transitividad, exhaustiva, aditividad y neutralidad\cite{Somarriba_2008,Espina_2012}. Debido a las propiedades presentes en el indicador $DP_2$ dan un beneficio al análsis de componentes principales\cite{Somarriba_2008}.
 
-\begin{table}[H]
-    \changefontsizes{9pt}
-    \centering
-    \begin{tabular}{lr} \hline
-        Indicadores socioeconomicos                                                              & Base de referencia \\  \hline
-        Porcentaje de población analfabeta de 15 años o más.                                     & -66.74             \\
-        Porcentaje de población de 15 años o más sin educación básica.                           & -94.79             \\
-        Porcentaje de viviendas particulares sin agua entubada.                                  & -89.90             \\
-        Porcentaje de viviendas particulares sin drenaje ni excusado.                            & -69.45             \\
-        Porcentaje de viviendas particulares sin energía eléctrica.                              & -99.74             \\
-        Porcentaje de viviendas particulares con piso de tierra.                                 & -79.71             \\
-        Porcentaje de viviendas particulares con hacinamiento                                    & -83.24             \\
-        Porcentaje de porcentaje de población que vive en localidades menores a 5000 habitantes. & -100.00            \\
-        Porcentaje de población ocupada con ingresos de hasta 2 salarios mínimos.                & -100.00            \\ \hline
-    \end{tabular}
-    \normalsize
-    \caption{Base de referencia a nivel municipal en el periodo 2010-2020.}
-    \label{table:base_de_referencia}
-\end{table}
+\input{Files/Tables/reference_basis.tex}
 
 El indicador $DP_2$ sintético se define en la ecuación \ref{eq:dp2_definition}.
 
