@@ -1,6 +1,16 @@
 \section{Introducción}
 
-Uno de los problemas que se presentan en las sociedades humanas, más en especifico en la sociedad mexicana es el dificil acceso a los servicios públicos como salud, educación o justicia. Causando condiciones de vulnerabilidad e inseguridad. Una consecuencia de esta precariedad es la disminución en la calidad de vida de los habitantes. Con este problema surgen instituciones nacionales e internacionales para estudiar el caso, recabar información y generar indicadores que ayuden a identificar los casos en una región extensa. El consejo Nacional de Población (CONAPO) calcula el índice de marginación (IM) basado en el fundamento en el enfoque de necesidades básicas insatisfechas, utilizando el análisis de componentes principales \cite{conapo_2021}. De una manera semejante, el Consejo Nacional de Evaluación de la Política de Desarrollo Social (CONEVAL) estima el índice de rezago social (IRS) por medio de una suma ponderada de porcentajes \cite{CONEVAL_2007}. El IM utiliza como indicadores\cite{CONAPO_1995} los siguientes porcentajes:
+Uno de los problemas que se presentan en las sociedades humanas, más en especifico en la sociedad mexicana es el dificil acceso a los servicios públicos como salud, educación o justicia. Causando condiciones de vulnerabilidad e inseguridad. Una consecuencia de esta precariedad es la disminución en la calidad de vida de los habitantes. Con este problema surgen instituciones nacionales e internacionales para estudiar el caso, recabar información y generar indicadores que ayuden a identificar los casos en una región extensa. El consejo Nacional de Población (CONAPO) calcula el índice de marginación (IM) basado en el fundamento en el enfoque de necesidades básicas insatisfechas, utilizando el análisis de componentes principales \cite{conapo_2021}. De una manera semejante, el Consejo Nacional de Evaluación de la Política de Desarrollo Social (CONEVAL) estima el índice de rezago social (IRS) por medio de una suma ponderada de porcentajes \cite{CONEVAL_2007}.  El IM se utiliza para localizar las zonas de atención prioritaria. Estas zonas tienen acceso a fondos y programas gubernamentales para el combate de la marginación y el desarrollo de la población \cite{DOF_2011,DOF_2012,DOF_2013,DOF_2014,DOF_2015,DOF_2016,DOF_2017,DOF_2018,DOF_2019}. Los programas que usan al IM para determinar las localidades que seran beneficiarias son:
+
+\begin{itemize}
+    \item Estrategia 100x100\cite{CONEVAL_2013}.
+    \item Estrategia del Gobierno Federal para la Dotación de Piso Firme\cite{DOF_2020}.
+    \item Programa de Apoyo Alimentario en Zonas de Atención Prioritaria\cite{SEDESOL_2008}.
+    \item Programa de Apoyo a Zonas de Atención Prioritaria\cite{DOF_2014_zonas}.
+\end{itemize}
+
+
+El IM utiliza como indicadores\cite{CONAPO_2022} los siguientes porcentajes:
 
 \begin{itemize}
     \item Población analfabeta de 15 años o más.
@@ -14,20 +24,48 @@ Uno de los problemas que se presentan en las sociedades humanas, más en especif
     \item Población ocupada con ingresos de hasta 2 salarios mínimos.
 \end{itemize}
 
-Cada indicador es normalización usando la ecuación \ref{eq:standar_variable}.
+
+Para estimar los índices de marginación se utiliza el método de distancia $P_2$\cite{Trapero_1977} ($DP_2$). El método de distancia $P_2$ fue desarrollado para hacer comparaciones temporales y espaciales. Ha sido aplciado en investigaciones sobre la calidad de vida en la Unión Europea y España\cite{Somarriba_2008,Zarzoza_2012,Zarzoza_1996,Nayak_2012}. La base del método es tener una base de referencia. Los valores de referencia pueden conformarse por los mínimos o máximos para todas los indicadores o para cada indicador. Estos valores no tienen que ser necesariamente reales. Si se toman los valores mínimos, entonces el indicador de $DP_2$ tiene valores altos cuando existen mejores condiciones socioeconomicas. La base de referencia a nivel municipal para el periodo 2010-2020 se muestra en la tabla \ref{table:base_de_referencia}\cite{CONAPO_2022}. El $DP_2$ evita la duplicación de información y imparcialidad en el esquema de ponderación. Además de esto contiene las siguientes propiedades matemáticas: existencia, determinación monotonía, unicidad, invarianza frente a la base de referencia, homogeneidad, transitividad, exhaustiva, aditividad y neutralidad\cite{Somarriba_2008,Espina_2012}. Debido a las propiedades presentes en el indicador $DP_2$ dan un beneficio al análsis de componentes principales\cite{Somarriba_2008}.
+
+\begin{table}[H]
+    \changefontsizes{9pt}
+    \centering
+    \begin{tabular}{lr} \hline
+        Indicadores socioeconomicos                                                              & Base de referencia \\  \hline
+        Porcentaje de población analfabeta de 15 años o más.                                     & -66.74             \\
+        Porcentaje de población de 15 años o más sin educación básica.                           & -94.79             \\
+        Porcentaje de viviendas particulares sin agua entubada.                                  & -89.90             \\
+        Porcentaje de viviendas particulares sin drenaje ni excusado.                            & -69.45             \\
+        Porcentaje de viviendas particulares sin energía eléctrica.                              & -99.74             \\
+        Porcentaje de viviendas particulares con piso de tierra.                                 & -79.71             \\
+        Porcentaje de viviendas particulares con hacinamiento                                    & -83.24             \\
+        Porcentaje de porcentaje de población que vive en localidades menores a 5000 habitantes. & -100.00            \\
+        Porcentaje de población ocupada con ingresos de hasta 2 salarios mínimos.                & -100.00            \\ \hline
+    \end{tabular}
+    \normalsize
+    \caption{Base de referencia a nivel municipal en el periodo 2010-2020.}
+    \label{table:base_de_referencia}
+\end{table}
+
+El indicador $DP_2$ sintético se define en la ecuación \ref{eq:dp2_definition}.
+
+\begin{equation}
+    DP_2 =  \sum_{i} \frac{d_{ij}}{\sigma_j} (1-R_{j,j-1,\dots,1}^2) \qquad R_1^2=0
+    \label{eq:dp2_definition}
+\end{equation}
+
+donde $d_{ij}$ es la distancia de la $j$-esima variable del municipio con respecto a la base de referencia, $\sigma_j$ es la desviación estándar de la variable $j$ y $R_{j,j-1,\dots,1}^2$ es el coeficiente de determinación de la regresión del indicador parcial $j$ con los demás indicadores. $R_1^2$ es igual a cero porque el primer indicador aporta toda la información y al no existir algún indicador previo su ponderación es la unidad. Una forma de observar el índice de marginación es normalizando (ecuación \ref{eq:dp2_normalization}) sus valores para apreciar la evolución de cada municipio\cite{Somarriba_2013}.
+
+\begin{equation}
+    \bar{DP_2^i} = \frac{DP_2^i-\text{min}(DP_2)}{\text{max}(DP_2)-\text{min}(DP_2)}
+    \label{eq:dp2_normalization}
+\end{equation}
+
+Es importante aclarar que el índice de marginación normalizado se puede tomar como una guía ya que es sensible a los valores atípicos, lo que en cierta medida hace que se amplifiquen los datos normalizados ante los casos más extremos. Pero debido a las propiedades del método y que el rango de cada uno de los índices es estrecho y lineal, se podría esperar que la normalización no genere ruido en las colas de la distribución. Cada indicador es normalización usando la ecuación \ref{eq:standar_variable}.
 
 \begin{equation}
     Z_{ij} = \frac{X_{ij}-\mu_j}{\sigma_j} \label{eq:standar_variable}
 \end{equation}
 
 Donde $X_{ij}$ representa al i-ésimo valor de la variable $k$, $\mu_k$ y $\sigma_k$ es el promedio y desviación estandar de la variable $k$ respectivamente. Debido a la normalización de cada indicador, el IM no puede utilizarse para realizar un seguimiento temporal. Para representar a los nueva indicadores en uno solo se aplica el análisis de componentes principales. La CONAPO emplea el método de Dalenius Hodges\cite{Dalenius_1959} para agrupar los puntajes en cinco categorias de marginación (muy alta, alta, media, baja y muy baja). El IM permite ordenar y clasificar según su categoria de marginación en el año que se calcula.
-
-El IM se utiliza para localizar las zonas de atención prioritaria. Estas zonas tienen acceso a fondos y programas gubernamentales para el combate de la marginación y el desarrollo de la población \cite{DOF_2011,DOF_2012,DOF_2013,DOF_2014,DOF_2015,DOF_2016,DOF_2017,DOF_2018,DOF_2019}. Los programas que usan al IM para determinar las localidades que seran beneficiarias son:
-
-\begin{itemize}
-    \item Estrategia 100x100\cite{CONEVAL_2013}.
-    \item Estrategia del Gobierno Federal para la Dotación de Piso Firme\cite{DOF_2020}.
-    \item Programa de Apoyo Alimentario en Zonas de Atención Prioritaria\cite{SEDESOL_2008}.
-    \item Programa de Apoyo a Zonas de Atención Prioritaria\cite{DOF_2014_zonas}.
-\end{itemize}
 
