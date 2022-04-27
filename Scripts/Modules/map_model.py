@@ -6,18 +6,36 @@ import matplotlib.pyplot as plt
 
 
 class map_model:
+    """
+    Modelo para generar la gráfica del mapa de México 
+    """
+
     def __init__(self, params: dict) -> None:
+        """
+        Constructor
+        """
         self.params = params
         self.read()
 
     def read(self) -> GeoDataFrame:
+        """
+        Lectura de los datos
+        """
         self.data = read_file(self.params["path map"])
+        # Estandarización del nombre del indice de cada municipio
         self.data = self.data.rename(columns={"CLAVE": "CVE_MUN"})
 
     def merge(self, data: data_class) -> GeoDataFrame:
-        self.data = self.data.merge(data.data, on="CVE_MUN")
+        """
+        Concadenación de los datos por medio del índice de municipio
+        """
+        self.data = self.data.merge(data.data,
+                                    on="CVE_MUN")
 
     def plot_GM(self) -> None:
+        """
+        Ploteo del GM sobre el mapa dado
+        """
         colors = get_classes_colors(self.params)
         self.data["color"] = self.data["GM"].apply(
             lambda x: self.params["classes"][x]["color"])

@@ -5,38 +5,59 @@ from os.path import join
 
 
 class metrics_class:
+    """
+    Modelo que aplica las metricas siguientes 
+    + Calinski Harabasz
+    + Fowlkes Mallows
+    + Confusion matrix
+
+    Se guarda un archivo y la gráfica de la confusion matrix con el nombre del metodo con todas sus metricas
+    """
+
     def __init__(self, params: dict, data: array) -> None:
         self.params = params
         self.data = data
 
     def apply_all_metrics(self, true_label: array, model_label: array) -> dict:
         results = {}
-        results["Calinski Harabasz model"] = self.get_CH_score(self.data,
-                                                               model_label)
-        results["Calinski Harabasz true"] = self.get_CH_score(self.data,
-                                                              true_label)
-        results["Fowlkes Mallows"] = self.get_FM_score(true_label,
-                                                       model_label)
-        matrix = self.get_confusion_matrix(true_label,
-                                           model_label)
-        self.plot_confusion_matrix(matrix)
+        results["Calinski Harabasz model"] = self._get_CH_score(self.data,
+                                                                model_label)
+        results["Calinski Harabasz true"] = self._get_CH_score(self.data,
+                                                               true_label)
+        results["Fowlkes Mallows"] = self._get_FM_score(true_label,
+                                                        model_label)
+        self._get_confusion_matrix(true_label,
+                                   model_label)
         return results
 
-    def get_CH_score(self, data: array, model_label: array) -> float:
+    def _get_CH_score(self, data: array, model_label: array) -> float:
+        """
+        Obtiene el Calinski Harabasz score a las etiquetas dadas
+        """
         ch_scores = calinski_harabasz_score(data, model_label)
         return ch_scores
 
-    def get_FM_score(self, true_label: array, model_label: array) -> float:
+    def _get_FM_score(self, true_label: array, model_label: array) -> float:
+        """
+        Obtiene el Fowlkes Mallows score a las etiquetas dadas
+        """
         score = fowlkes_mallows_score(true_label,
                                       model_label)
         return score
 
-    def get_confusion_matrix(self, true_label: array, model_label: array) -> array:
+    def _get_confusion_matrix(self, true_label: array, model_label: array) -> None:
+        """
+        Obtiene la confision matrix de las etiquetas dadas
+        """
         matrix = confusion_matrix(true_label,
                                   model_label)
+        self._plot_confusion_matrix(matrix)
         return matrix
 
-    def plot_confusion_matrix(self, matrix: array) -> None:
+    def _plot_confusion_matrix(self, matrix: array) -> None:
+        """
+        Grafica la confusion matrix obtenida
+        """
         fig, ax = plt.subplots()
         ax.imshow(matrix)
         class_labels = list(self.params["classes"].keys())

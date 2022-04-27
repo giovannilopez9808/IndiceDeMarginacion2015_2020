@@ -23,10 +23,12 @@ def get_params(year: int) -> dict:
         "path results": "../Results",
         # Direccion de las graficas
         "path graphics": "../Graphics",
+        # Columnas de datos que nunca seran usadas
         "useless columns": [
             "NOM_ENT",
             "NOM_MUN"
         ],
+        # Columnas de datos usadas para crear el embedding
         "embedding columns": [
             'ANALF',
             'SBASC',
@@ -38,6 +40,7 @@ def get_params(year: int) -> dict:
             'PL.5000',
             'PO2SM'
         ],
+        # Clase de tipo de marginación, se le da un id y un color
         "classes": {
             'Muy bajo': {"id": 0,
                          "color": "#b7094c",
@@ -70,6 +73,7 @@ def get_params(year: int) -> dict:
                    "file animation format": "PCA_3D_{}",
                    "file results": "PCA_3D.csv"},
         },
+        # Parametros para el método ISOMAP
         "ISOMAP": {
             "neighbors": {8: {"elevation": 34},
                           10: {"elevation": 34},
@@ -82,6 +86,7 @@ def get_params(year: int) -> dict:
                    "file animation format": "ISOMAP_3D_{}",
                    "file results": "ISOMAP_3D.csv"},
         },
+        # Parametros para el método de TSNE
         "TSNE": {
             "perplexity": {
                 100: {"elevation": 0},
@@ -96,6 +101,7 @@ def get_params(year: int) -> dict:
                    "file animation format": "TSNE_3D_{}",
                    "file results": "TSNE_3D.csv"},
         },
+        # Parametros para el método de LLE (no se uso)
         "LLE":
         {
             "neighbors": [4, 5, 6, 7],
@@ -104,14 +110,18 @@ def get_params(year: int) -> dict:
             "3D": {"components": 3,
                    "filenane": "LLE_3D.csv"},
         },
+        # Parametros para el método de Kmeans
         "Kmeans": {
             "k-means++",
             "random",
         }
     }
+    # Colores usados para el metodo SOM
     params["SOM colors"] = _define_SOM_colors(params)
+    # Elección del archivo de datos de CONAPO que se analizara
     params["file CONAPO data"] = _define_CONAPO_data(params,
                                                      year)
+    # Define la direccion de resultados y graficas dado el archivo a analizar
     params = _define_year_folders(params,
                                   year)
     # Verificación de la carpeta de resultados
@@ -122,6 +132,9 @@ def get_params(year: int) -> dict:
 
 
 def get_metrics_params() -> dict:
+    """
+    Dataset para obtener de forma automatica las metricas de cada modelo usado
+    """
     datasets = {
         "Models": {
             "SOM": {
@@ -154,11 +167,17 @@ def get_metrics_params() -> dict:
 
 
 def mkdir(path) -> None:
+    """
+    Estandarización para la creacion de carpetas
+    """
     makedirs(path,
              exist_ok=True)
 
 
 def get_classes_colors(params: dict) -> dict:
+    """
+    Obtiene un diccionario de colores para cada tipo de dato
+    """
     colors = {}
     for classes in params["classes"]:
         data = params["classes"][classes]
@@ -168,6 +187,9 @@ def get_classes_colors(params: dict) -> dict:
 
 
 def _define_year_folders(params: dict, year: int) -> dict:
+    """
+    Definición de las carpetas de resultados y graficas para cada tipo de archivo a analizar
+    """
     folder = "Data_{}".format(year)
 
     params["path graphics"] = join(params["path graphics"],
@@ -178,11 +200,17 @@ def _define_year_folders(params: dict, year: int) -> dict:
 
 
 def _define_CONAPO_data(params: dict, year: int) -> str:
+    """
+    Define el archivo que se usara para realizar el analisis
+    """
     label = "file data {}".format(year)
     return params[label]
 
 
 def _define_SOM_colors(params: dict) -> dict:
+    """
+    Colores usados para el metodo SOM
+    """
     colors = {}
     for classes in params["classes"]:
         dataset = params["classes"][classes]
@@ -193,21 +221,33 @@ def _define_SOM_colors(params: dict) -> dict:
 
 
 def define_filenames_2D(params: dict, model: str) -> dict:
+    """
+    Define el nombre de los archivos dado un modelo para el caso bidimensional
+    """
     params["file graphics"] = params[model]["2D"]["file graphics"]
     params = define_file_results(params, model, "2D")
     return params
 
 
 def define_filenames_3D(params: dict, model: str) -> dict:
+    """
+    Define el nombre de los archivos dado un modelo para el caso tridimensioanl
+    """
     params = define_file_results(params, model, "3D")
     return params
 
 
 def define_file_results(params: dict, model: str, dim: str) -> dict:
+    """
+    Define el nombre de los archivos dado un modelo y su dimension
+    """
     params["file results"] = params[model][dim]["file results"]
     return params
 
 
 def define_file_animation(dataset: dict, param: str) -> str:
+    """
+    Define el nombre de la animacion
+    """
     filename = dataset["3D"]["file animation format"].format(param)
     return filename

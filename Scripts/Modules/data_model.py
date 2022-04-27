@@ -76,6 +76,9 @@ class data_class:
             lambda x: self.classes[x]["id"])
 
     def _only_2015(self) -> DataFrame:
+        """
+        Obtiene unicamente los datos del año 2015
+        """
         self.data = self.data[self.data["AÑO"] == 2015]
         self.data = self.data.drop(columns="AÑO")
 
@@ -121,15 +124,20 @@ class data_class:
         self.embedding = (self.embedding-mu)/sigma
 
     def _standarized_index_town(self) -> DataFrame:
+        """
+        Indice con cinco caracteres en el indice del municipio
+        """
         self.data["CVE_MUN"] = self.data["CVE_MUN"].astype(
             str).str.zfill(5)
 
     def _initialize_results_dataframe(self) -> DataFrame:
+        """
+        Inicialización del dataframe de resultados
+        """
         self.results = DataFrame()
         self.results["CVE_MUN"] = self.data["CVE_MUN"]
         self.results["GM"] = self.data["GM"]
         self.results["IM"] = self.data["IM"]
-        # self.results["IMN"] = self.data["IMN"]
 
     def obtain_index_data_for_class(self, classes: str) -> DataFrame:
         """
