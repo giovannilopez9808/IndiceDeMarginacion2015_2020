@@ -20,3 +20,5 @@ Donde $\mathbb{C}$ es la matriz para centrar. Definiendo a la matriz kernel como
     min\;\; ||\mathbb{K}_c-\mathbb{K}^*|| \qquad \mathbb{K}_c = \mathbb{C}\mathbb{K}\mathbb{C}
     \label{eq:pca_cost_function}
 \end{equation}
+
+La solución de la ecuación \ref{eq:pca_cost_function} es $\mathbb{K}=\sum\limits_i^p \lambda_i v_i v_i^t $, donde $v_i$ y $\lambda_i$ son los eigenvectores y eigenvalores de $\mathbb{K}$ respectivamente.
