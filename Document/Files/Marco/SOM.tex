@@ -1,0 +1,10 @@
+\subsubsection{Self-Organizing-Map (SOM)}
+
+SOM es un algoritmo de clasificación no supervisada. Su objetivo es reducir la dimensionalidad del los datos dados preservando la estructura topológica. El algoritmo minimiza la ecuación \ref{eq:som}.
+
+\begin{equation}
+    C(\{m_l\},\{l(i)\}) = \sum_i \sum_k h(||c_k-c_{l(i)}||^2) ||x_i-m_k||^2
+    \label{eq:som}
+\end{equation}
+
+Donde $m_l$ es el representante más cercano a $x_i$, $h()$ es una función decreciente y positiva y $c_k$ son las celdas donde se asociara el dado $x_i$.

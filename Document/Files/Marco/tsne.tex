@@ -1,0 +1,20 @@
+\subsubsection{T-SNE}
+
+El algoritmo de T-SNE consiste en crear una distribución de probabilidad que representante las similitudes entre vecinos en un espacio de gran dimensión en un espacio de menor dimensión. Para cada elemento del conjunto de datos se centra una distribución gaussiana alrededor del elemento. En seguida se obtiene la densidad bajo la distribución y normalizamos el valor, calculando así una probabilidad condicional (ecuación \ref{eq:tsne_p_probability}).
+
+\begin{equation}
+    P_i=P_{j|i} = \frac{exp(-||x_i-x_j||^2/\sigma)}{\sum\limits_{k\neq i} exp(-||x_k-x_i||^2/\sigma)} \label{eq:tsne_p_probability}
+\end{equation}
+
+El valor de $\sigma$ se define por medio de un parámetro llamado perplejidad, el cual corresponde al número de vecinos alredeor de cada punto. A una mayor probabilidad condicional, los elementos ij son más similares. A partir de las probabilidades condicionales se tratan encontrar pares de elementos tales que las distribuciones $P_{i|j}$ y $q_{i|j}$ se parecen. El valor de $q_{i|j}$ se obtiene mediante la distribución T (ecuación \ref{eq:tsne_q_probability}).
+
+\begin{equation}
+    Q_i=q_{j|i} = \frac{exp(-||x_i-x_j||^2)}{\sum\limits_{k\neq i} exp(-||x_k-x_i||^2)} \label{eq:tsne_q_probability}
+\end{equation}
+
+Por lo tanto, el algoritmo T-SNE se centra en minimizar la distancia Kullback-Leiber (ecuación \ref{eq:tsne_cost_function})
+
+\begin{equation}
+    min\;\; d_i (P_i;Q_i) \qquad d(P^1;P^2) = \sum_i P_i^1 \log \left(\frac{P^1_i}{P^2_i} \right)
+    \label{eq:tsne_cost_function}
+\end{equation}

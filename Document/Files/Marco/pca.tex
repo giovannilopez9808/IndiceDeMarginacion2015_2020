@@ -1,0 +1,22 @@
+\subsubsection{Análisis de componentes principales}
+
+El análisis de componentes principales (PCA) es un método estadístico que permite simplificar la complejidad de espacios muestrales con muchas dimensiones a la vez que conserva su información. La idea del algoritmo es asociar a cada elemento de la base de datos con un vector de menor dimensión tal que se minimiza la ecuación \ref{eq:pca_idea}.
+
+\begin{equation}
+    \sum_i \sum_j (d(x_i,x_j)^2-d(x^*_i-x_j^*)^2)^2
+    \label{eq:pca_idea}
+\end{equation}
+
+El problema de minimizar la ecuación \ref*{eq:pca_idea} se puede transformar a la ecuación \ref{eq:pca_problem}.
+
+\begin{equation}
+    min\;\; ||-\frac{1}{2}\mathbb{C}(\mathbb{D}^2-\mathbb{D}^{*2})\mathbb{C}||_F^2
+    \label{eq:pca_problem}
+\end{equation}
+
+Donde $\mathbb{C}$ es la matriz para centrar. Definiendo a la matriz kernel como $\mathbb{K}=\mathbb{X}\mathbb{X}^t$ y $\mathbb{D}$ como la matriz asociada a las distancias, la ecuación \ref{eq:pca_problem} puede escribirse como en la ecuación \ref{eq:pca_cost_function}.
+
+\begin{equation}
+    min\;\; ||\mathbb{K}_c-\mathbb{K}^*|| \qquad \mathbb{K}_c = \mathbb{C}\mathbb{K}\mathbb{C}
+    \label{eq:pca_cost_function}
+\end{equation}

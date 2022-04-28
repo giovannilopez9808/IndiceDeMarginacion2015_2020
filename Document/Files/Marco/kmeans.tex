@@ -1,0 +1,8 @@
+\subsubsection{K-means}
+
+El algoritmo de K-means es un algoritmo de clasificación no supervisada que agrupa objetos en k conjuntos basandose en los valores de las variables dadas. El algoritmo asigna a cada elemento a un conjunto minimizando la suma de las distancias de cada objeto con el centroide del conjunto (ecuación \ref{eq:kmeams_cost_function}).
+
+\begin{equation}
+    \underset{\{r_{nk}\}\{\mu_k\}}{min} \sum_{n=1}^N \sum_{k=1}^K r_{nk} ||x_n-\mu_k||^2
+    \label{eq:kmeams_cost_function}
+\end{equation}
