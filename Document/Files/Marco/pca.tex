@@ -22,3 +22,61 @@ Donde $\mathbb{C}$ es la matriz para centrar. Definiendo a la matriz kernel como
 \end{equation}
 
 La solución de la ecuación \ref{eq:pca_cost_function} es $\mathbb{K}=\sum\limits_i^p \lambda_i v_i v_i^t $, donde $v_i$ y $\lambda_i$ son los eigenvectores y eigenvalores de $\mathbb{K}$ respectivamente.
+
+\paragraph{Kernel lineal}
+
+El kernel lineal se encuentra definido en la ecuación \ref{eq:kernel_lineal}.
+
+\begin{equation}
+    K(x,x') = x \cdot x'
+    \label{eq:kernel_lineal}
+\end{equation}
+
+\paragraph{Kernel polinomial}
+
+El kernel polinimial se encuentra definido en la ecuación \ref{eq:kernel_polinomial}.
+
+\begin{equation}
+    K(x,x') = (x \cdot x'+r)^d
+    \label{eq:kernel_polinomial}
+\end{equation}
+
+Donde $r$ es un parámetro y $d$ es el grado del polinomio.
+
+\paragraph{Kernel gaussiano}
+
+El kernel gaussiano se encuentra definido en la ecuación \ref{eq:kernel_gaussiano}.
+
+\begin{equation}
+    K(x,x') = exp(- \gamma ||x - x'||^2)
+    \label{eq:kernel_gaussiano}
+\end{equation}
+
+Donde $\gamma$ es un parámetro que controla el comportamiento del kernel. Cuando es muy pequeño el modelo se aproxima al kernel lineal.
+
+\paragraph{Kernel sigmoide}
+
+El kernel sigmoide se encuentra definido en la ecuación \ref{eq:kernel_sigmoide}.
+
+\begin{equation}
+    K(x,x') = tanh(\gamma (x \cdot x') +r)
+    \label{eq:kernel_sigmoide}
+\end{equation}
+
+
+\paragraph{Parámetros}
+
+En la tabla \ref{table:pca_parameters} se encuentran los parámetros que se usaron para cada kernel antes especificado.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cccc} \hline
+        Kernel     & Grado & $\gamma$      & $r$ \\ \hline
+        Lineal     & -     & -             & -   \\
+        Polinomial & 3     & -             & 1   \\
+        Gaussiano  & -     & $\frac{1}{n}$ & -   \\
+        Sigmoide   & -     & $\frac{1}{n}$ & 1   \\ \hline
+    \end{tabular}
+    \caption{Parámetros usados para cada kernel. El simbolo $-$ indica que no es necesario el parámetro en el kernel.}
+    \label{table:pca_parameters}
+\end{table}
