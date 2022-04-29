@@ -1,0 +1,19 @@
+\subsubsection{Hierarchical Cluster}
+
+El algoritmo de Hierarchical clustering es un algoritmo que por medio de una función recursiva une a un par de conjuntos a uno solo usando un enlace por distancias.
+
+Existen diversas maneras de medir una distancia, en este trabajo se uso la similitud del coseno (ecuación \ref{eq:cosine_similitud}) debido a que presento mejores resultados con los datos utilizados.
+
+\begin{equation}
+    d(A,B) = \frac{A\cdot B}{||A|| ||B||}
+    \label{eq:cosine_similitud}
+\end{equation}
+
+La función para calcular la distancia entre dos conjuntos es llamada linkage function. En este trabajo se uso la función complete. La ecuación \ref{eq:linkahe_complete} es la definición de linkage complete.
+
+\begin{equation}
+    d(C_i,C_j) = \max \left\lbrace d(x,y) : x\in C_i\;, y\in C_j \right\rbrace \label{eq:linkahe_complete}
+\end{equation}
+
+
+
