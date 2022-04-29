@@ -1,4 +1,4 @@
-\subsubsection{Análisis de componentes principales}
+\subsubsection{Análisis de componentes principales \label{sec:pca}}
 
 El análisis de componentes principales (PCA) es un método estadístico que permite simplificar la complejidad de espacios muestrales con muchas dimensiones a la vez que conserva su información. La idea del algoritmo es asociar a cada elemento de la base de datos con un vector de menor dimensión tal que se minimiza la ecuación \ref{eq:pca_idea}.
 
@@ -32,13 +32,13 @@ El kernel lineal se encuentra definido en la ecuación \ref{eq:kernel_lineal}.
     \label{eq:kernel_lineal}
 \end{equation}
 
-\paragraph{Kernel polinomial}
+\paragraph{Kernel coseno}
 
-El kernel polinimial se encuentra definido en la ecuación \ref{eq:kernel_polinomial}.
+El kernel coseno se encuentra definido en la ecuación \ref{eq:kernel_coseno}.
 
 \begin{equation}
-    K(x,x') = (x \cdot x'+r)^d
-    \label{eq:kernel_polinomial}
+    K(x,x') = \frac{x\cdot x'}{||x|| ||x'||}
+    \label{eq:kernel_coseno}
 \end{equation}
 
 Donde $r$ es un parámetro y $d$ es el grado del polinomio.
@@ -71,11 +71,11 @@ En la tabla \ref{table:pca_parameters} se encuentran los parámetros que se usar
 \begin{table}[H]
     \centering
     \begin{tabular}{cccc} \hline
-        Kernel     & Grado & $\gamma$      & $r$ \\ \hline
-        Lineal     & -     & -             & -   \\
-        Polinomial & 3     & -             & 1   \\
-        Gaussiano  & -     & $\frac{1}{n}$ & -   \\
-        Sigmoide   & -     & $\frac{1}{n}$ & 1   \\ \hline
+        Kernel    & Grado & $\gamma$      & $r$ \\ \hline
+        Lineal    & -     & -             & -   \\
+        Coseno    & -     & -             & -   \\
+        Gaussiano & -     & $\frac{1}{n}$ & -   \\
+        Sigmoide  & -     & $\frac{1}{n}$ & 1   \\ \hline
     \end{tabular}
     \caption{Parámetros usados para cada kernel. El simbolo $-$ indica que no es necesario el parámetro en el kernel.}
     \label{table:pca_parameters}

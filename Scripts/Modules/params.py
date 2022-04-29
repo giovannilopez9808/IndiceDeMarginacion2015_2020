@@ -11,104 +11,151 @@ def get_params(year: int) -> dict:
     """
     params = {
         # Direccion de los archivos de datos
-        "path data": "../Data",
+        "path data":
+        "../Data",
         # Direccion con la informacion del mapa de México
-        "path map": "../Data/map",
+        "path map":
+        "../Data/map",
         # Nombre de los daros de 1990 a 2015
-        "file data 2015": "IMM_1990.csv",
+        "file data 2015":
+        "IMM_1990.csv",
         # Nombre de los datos de 2020
-        "file data 2020": "IMM_2020.csv",
-        "file dictionary": "diccionario.csv",
+        "file data 2020":
+        "IMM_2020.csv",
+        "file dictionary":
+        "diccionario.csv",
         # Direccion de los archivos de resultados
-        "path results": "../Results",
+        "path results":
+        "../Results",
         # Direccion de las graficas
-        "path graphics": "../Graphics",
+        "path graphics":
+        "../Graphics",
         # Columnas de datos que nunca seran usadas
-        "useless columns": [
-            "NOM_ENT",
-            "NOM_MUN"
-        ],
+        "useless columns": ["NOM_ENT", "NOM_MUN"],
         # Columnas de datos usadas para crear el embedding
         "embedding columns": [
-            'ANALF',
-            'SBASC',
-            'OVSDE',
-            'OVSEE',
-            'OVSAE',
-            'OVPT',
-            'VHAC',
-            'PL.5000',
-            'PO2SM'
+            'ANALF', 'SBASC', 'OVSDE', 'OVSEE', 'OVSAE', 'OVPT', 'VHAC',
+            'PL.5000', 'PO2SM'
         ],
         # Clase de tipo de marginación, se le da un id y un color
         "classes": {
-            'Muy bajo': {"id": 0,
-                         "color": "#b7094c",
-                         },
-            'Bajo': {"id": 1,
-                     "color": "#892b64",
-                     },
-            'Medio': {"id": 2,
-                      "color": "#5c4d7d",
-                      },
-            'Alto': {"id": 3,
-                     "color": "#2e6f95",
-                     },
-            'Muy alto': {"id": 4,
-                         "color": "#0091ad",
-                         },
+            'Muy bajo': {
+                "id": 0,
+                "color": "#b7094c",
+            },
+            'Bajo': {
+                "id": 1,
+                "color": "#892b64",
+            },
+            'Medio': {
+                "id": 2,
+                "color": "#5c4d7d",
+            },
+            'Alto': {
+                "id": 3,
+                "color": "#2e6f95",
+            },
+            'Muy alto': {
+                "id": 4,
+                "color": "#0091ad",
+            },
         },
         # Parametros para el método de PCA
         "PCA": {
             "kernels": {
-                "linear": {"elevation": 19},
-                "rbf": {"elevation": 0},
-                "cosine": {"elevation": 0},
-                "sigmoid": {"elevation": 0}
+                "linear": {
+                    "elevation": 19,
+                    "Name": "linela"
+                },
+                "rbf": {
+                    "elevation": 0,
+                    "Name": "Gaussiano"
+                },
+                "cosine": {
+                    "elevation": 0,
+                    "Name": "Coseno"
+                },
+                "sigmoid": {
+                    "elevation": 0,
+                    "Name": "Sigmoide"
+                }
             },
-            "2D": {"components": 2,
-                   "file results": "PCA_2D.csv",
-                   "file graphics": "PCA_2D.png"},
-            "3D": {"components": 3,
-                   "file animation format": "PCA_3D_{}",
-                   "file results": "PCA_3D.csv"},
+            "2D": {
+                "components": 2,
+                "file results": "PCA_2D.csv",
+                "file graphics": "PCA_2D.png"
+            },
+            "3D": {
+                "components": 3,
+                "file animation format": "PCA_3D_{}",
+                "file results": "PCA_3D.csv"
+            },
         },
         # Parametros para el método ISOMAP
         "ISOMAP": {
-            "neighbors": {8: {"elevation": 34},
-                          10: {"elevation": 34},
-                          12: {"elevation": 34},
-                          14: {"elevation": 34}},
-            "2D": {"components": 2,
-                   "file graphics": "ISOMAP_2D.png",
-                   "file results": "ISOMAP_2D.csv"},
-            "3D": {"components": 3,
-                   "file animation format": "ISOMAP_3D_{}",
-                   "file results": "ISOMAP_3D.csv"},
+            "neighbors": {
+                8: {
+                    "elevation": 34
+                },
+                10: {
+                    "elevation": 34
+                },
+                12: {
+                    "elevation": 34
+                },
+                14: {
+                    "elevation": 34
+                }
+            },
+            "2D": {
+                "components": 2,
+                "file graphics": "ISOMAP_2D.png",
+                "file results": "ISOMAP_2D.csv"
+            },
+            "3D": {
+                "components": 3,
+                "file animation format": "ISOMAP_3D_{}",
+                "file results": "ISOMAP_3D.csv"
+            },
         },
         # Parametros para el método de TSNE
         "TSNE": {
             "perplexity": {
-                100: {"elevation": 0},
-                200: {"elevation": 0},
-                300: {"elevation": 0},
-                400: {"elevation": 0}
+                100: {
+                    "elevation": 0
+                },
+                200: {
+                    "elevation": 0
+                },
+                300: {
+                    "elevation": 0
+                },
+                400: {
+                    "elevation": 0
+                }
             },
-            "2D": {"components": 2,
-                   "file results": "TSNE_2D.csv",
-                   "file graphics": "TSNE_2D.png"},
-            "3D": {"components": 3,
-                   "file animation format": "TSNE_3D_{}",
-                   "file results": "TSNE_3D.csv"},
+            "2D": {
+                "components": 2,
+                "file results": "TSNE_2D.csv",
+                "file graphics": "TSNE_2D.png"
+            },
+            "3D": {
+                "components": 3,
+                "file animation format": "TSNE_3D_{}",
+                "file results": "TSNE_3D.csv"
+            },
         },
         # Parametros para el método de LLE (no se uso)
-        "LLE":
-        {
+        "LLE": {
             "neighbors": [4, 5, 6, 7],
-            "2D": {"components": 2,
-                   "filenane": "LLE_2D.csv"},
-            "3D": {"components": 3,
-                   "filenane": "LLE_3D.csv"},
+            "2D": {
+                "components": 2,
+                "filenane": "LLE_2D.csv"
+            },
+            "3D": {
+                "components": 3,
+                "filenane": "LLE_3D.csv"
+            },
         },
         # Parametros para el método de Kmeans
         "Kmeans": {
@@ -119,11 +166,9 @@ def get_params(year: int) -> dict:
     # Colores usados para el metodo SOM
     params["SOM colors"] = _define_SOM_colors(params)
     # Elección del archivo de datos de CONAPO que se analizara
-    params["file CONAPO data"] = _define_CONAPO_data(params,
-                                                     year)
+    params["file CONAPO data"] = _define_CONAPO_data(params, year)
     # Define la direccion de resultados y graficas dado el archivo a analizar
-    params = _define_year_folders(params,
-                                  year)
+    params = _define_year_folders(params, year)
     # Verificación de la carpeta de resultados
     mkdir(params["path results"])
     # Verificación de la carpeta de las graficas
@@ -170,8 +215,7 @@ def mkdir(path) -> None:
     """
     Estandarización para la creacion de carpetas
     """
-    makedirs(path,
-             exist_ok=True)
+    makedirs(path, exist_ok=True)
 
 
 def get_classes_colors(params: dict) -> dict:
@@ -192,10 +236,8 @@ def _define_year_folders(params: dict, year: int) -> dict:
     """
     folder = "Data_{}".format(year)
 
-    params["path graphics"] = join(params["path graphics"],
-                                   folder)
-    params["path results"] = join(params["path results"],
-                                  folder)
+    params["path graphics"] = join(params["path graphics"], folder)
+    params["path results"] = join(params["path results"], folder)
     return params
 
 

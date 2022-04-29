@@ -20,14 +20,13 @@ class metrics_class:
 
     def apply_all_metrics(self, true_label: array, model_label: array) -> dict:
         results = {}
-        results["Calinski Harabasz model"] = self._get_CH_score(self.data,
-                                                                model_label)
-        results["Calinski Harabasz true"] = self._get_CH_score(self.data,
-                                                               true_label)
-        results["Fowlkes Mallows"] = self._get_FM_score(true_label,
-                                                        model_label)
-        self._get_confusion_matrix(true_label,
-                                   model_label)
+        results["Calinski Harabasz model"] = self._get_CH_score(
+            self.data, model_label)
+        results["Calinski Harabasz true"] = self._get_CH_score(
+            self.data, true_label)
+        results["Fowlkes Mallows"] = self._get_FM_score(
+            true_label, model_label)
+        self._get_confusion_matrix(true_label, model_label)
         return results
 
     def _get_CH_score(self, data: array, model_label: array) -> float:
@@ -41,16 +40,15 @@ class metrics_class:
         """
         Obtiene el Fowlkes Mallows score a las etiquetas dadas
         """
-        score = fowlkes_mallows_score(true_label,
-                                      model_label)
+        score = fowlkes_mallows_score(true_label, model_label)
         return score
 
-    def _get_confusion_matrix(self, true_label: array, model_label: array) -> None:
+    def _get_confusion_matrix(self, true_label: array,
+                              model_label: array) -> None:
         """
         Obtiene la confision matrix de las etiquetas dadas
         """
-        matrix = confusion_matrix(true_label,
-                                  model_label)
+        matrix = confusion_matrix(true_label, model_label)
         self._plot_confusion_matrix(matrix)
         return matrix
 
@@ -62,10 +60,8 @@ class metrics_class:
         ax.imshow(matrix)
         class_labels = list(self.params["classes"].keys())
         len_class_labels = len(class_labels)
-        ax.set_xticks(arange(len_class_labels),
-                      labels=class_labels)
-        ax.set_yticks(arange(len_class_labels),
-                      labels=class_labels)
+        ax.set_xticks(arange(len_class_labels), labels=class_labels)
+        ax.set_yticks(arange(len_class_labels), labels=class_labels)
         # Rotate the tick labels and set their alignment.
         plt.setp(ax.get_xticklabels(),
                  rotation=45,
@@ -74,7 +70,9 @@ class metrics_class:
         # Loop over data dimensions and create text annotations.
         for i in range(len_class_labels):
             for j in range(len_class_labels):
-                ax.text(j, i, matrix[i, j],
+                ax.text(j,
+                        i,
+                        matrix[i, j],
                         ha="center",
                         va="center",
                         color="w")
