@@ -16,6 +16,7 @@
 {0pt}
 {2cm}
 \input{Files/titulo.tex}
+\input{Files/abstract.tex}
 \tableofcontents
 \input{Files/introduction.tex}
 \input{Files/marco.tex}
@@ -24,5 +25,6 @@
 \let\Section\section
 \def\section*#1{\Section{#1}}
 \bibliographystyle{vancouver}
+\nocite{*}
 \bibliography{references}
 \end{document}
