@@ -1,3 +1,7 @@
+"""
+Programa para crear mapas de México tomando en cuenta el indice de marginación
+"""
+
 from geopandas import read_file, GeoDataFrame
 from .data_model import data_class, join
 from .params import get_classes_colors

@@ -1,3 +1,9 @@
+"""
+Analisis de los datos usando el algoritmo de SOM en el caso de dos dimensiones
+
+Genera un archivo con la clasificación obtenida de cada punto dado
+"""
+
 from Modules.data_model import data_class
 from Modules.params import get_params
 from Modules.som import SOM_model

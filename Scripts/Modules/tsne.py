@@ -1,5 +1,5 @@
 """
-Clase que contiene la estructura para la ejecuccion del modelo de TSNE para diferentes datos dado el número de componentes y perplejidad
+Clase que contiene la estructura para la ejecuccion del algoritmo de TSNE para diferentes datos dado el número de componentes y perplejidad
 """
 
 from sklearn.manifold import TSNE
@@ -12,7 +12,7 @@ class TSNE_model:
 
     def create(self, n_components: int, perplexity: int) -> None:
         """
-        Inicializa el modelo PCA dado el numero de componentes y el nombre del kernel
+        Inicializa el algoritmo TSNE dado el numero de componentes y el nombre del kernel
         """
         self.model = TSNE(n_components=n_components,
                           perplexity=perplexity,
@@ -23,7 +23,7 @@ class TSNE_model:
 
     def run(self, data: array) -> None:
         """
-        Ejecuta el modelo PCA dado un embedding
+        Ejecuta el algoritmo TSNE dado un embedding
         """
         self.results = self.model.fit_transform(data)
 

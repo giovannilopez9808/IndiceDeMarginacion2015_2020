@@ -1,3 +1,7 @@
+"""
+Clase que contiene la ejecucion y organización de resultados del algortimo ISOMAP
+"""
+
 from sklearn.manifold import Isomap
 from numpy import array
 

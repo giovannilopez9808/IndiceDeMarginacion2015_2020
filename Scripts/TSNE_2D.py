@@ -1,5 +1,5 @@
 """
-Analisis de los datos usando el método de TSNE en el caso de dos dimensiones
+Analisis de los datos usando el algoritmo de TSNE en el caso de dos dimensiones
 
 Genera una gráfica con la visualziacion de los puntos en 2D y guarda los eigenvalores resultantes en un archivo.
 """

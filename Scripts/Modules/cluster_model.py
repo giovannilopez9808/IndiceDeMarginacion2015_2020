@@ -1,3 +1,7 @@
+"""
+Clase que contiene la logica y organización de comandos de ejecuccion para el algoritmo Hierachical Cluster
+"""
+
 from sklearn.cluster import AgglomerativeClustering
 from numpy import array
 

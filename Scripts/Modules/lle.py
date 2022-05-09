@@ -1,5 +1,5 @@
 """
-Clase que contiene la estructura para la ejecuccion del modelo de TSNE para diferentes datos dado el número de componentes y perplejidad
+Clase que contiene la estructura para la ejecuccion del algoritmo LLE para diferentes datos dado el número de componentes y perplejidad
 """
 
 from sklearn.manifold import LocallyLinearEmbedding
@@ -12,7 +12,7 @@ class LLE_model:
 
     def create(self, n_components: int, neighbors: int) -> None:
         """
-        Inicializa el modelo PCA dado el numero de componentes y el nombre del kernel
+        Inicializa el algortimo LLE dado el numero de componentes y el nombre del kernel
         """
         self.model = LocallyLinearEmbedding(n_components=n_components,
                                             n_neighbors=neighbors)
@@ -20,7 +20,7 @@ class LLE_model:
 
     def run(self, data: array) -> None:
         """
-        Ejecuta el modelo PCA dado un embedding
+        Ejecuta el algortimo LLE dado un embedding
         """
         self.results = self.model.fit_transform(data)
 

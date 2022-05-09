@@ -1,3 +1,9 @@
+"""
+Calculo de metricas a los resultados obtenidos de los algoritmos SOM, KMeans y Hierachical Cluster
+
+Se obtiene una tabla por cada algoritmo mostrando las metricas y una grafica donde se visualiza la tabla de confusion
+"""
+
 from Modules.params import get_params, get_metrics_params
 from Modules.metrics_model import metrics_class
 from Modules.results_model import results_model

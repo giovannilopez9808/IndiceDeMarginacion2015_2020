@@ -5,21 +5,25 @@
 Realizando una comparación visual con las figuras \ref{fig:isompa_2d}, \ref{fig:tsne_2d} y \ref{fig:PCA_2d} se observan las siguientes caracteristicas:
 
 \begin{itemize}
-    \item Existe una variación en la forma de los conjuntos formadas por el algoritmo ISOMAP. Sin embargo, conforme aumenta el número de vecinos los conjuntos forman estructuras más compactas.
+    \item Existe una variación en la forma de los conjuntos formados por el algoritmo ISOMAP. Sin embargo, conforme aumenta el número de vecinos, los conjuntos forman estructuras más compactas.
     \item Los resultados obtenidos por el algoritmo T-SNE presentan diferentes estructuras de los conjuntos para los años 2015 y 2020. Esto puede ser debido a la naturaleza aleatoria del algoritmo. Al aumento en la perplejidad del algoritmo, las estructuras llegan a un equilibrio. Por lo que si se quisiera obtener una reducción de dimensionalidad con una perplejidad mayor, los vectores de posición de cada dato no variaría en mucho con respecto a los presentados en este trabajo.
-    \item A diferencia de los algoritmos de ISOMAP y T-SNE, el algoritmo de PCA obtiene muy buenos resultados al reducir la dimensionalidad de los datos. Esto es debido a que con los kernels utilizados, en todos se puede diferenciar el inicio y el fin de cada conjunto. En especial para el kernel lineal y sigmoide, los cuales pueden separar a cada conjunto por medio de rectas. El mejor de los resultados es el obtenido por el kernel lineal, ya que con solo tomar la primer componente se puede realizar una diferencia en cada conjunto. Esto no es de sorprenderse, debido a que la teoría para formar cada conjunto se basa en este algoritmo.
+    \item A diferencia de los algoritmos de ISOMAP y T-SNE, el algoritmo de PCA obtiene muy buenos resultados al reducir la dimensionalidad de los datos. Esto es debido a que con los kernels utilizados, en todos se puede diferenciar el inicio y el fin de cada conjunto. En especial para el kernel lineal y sigmoide, los cuales pueden separar a cada conjunto por medio de rectas. El mejor de los resultados es el obtenido por el kernel lineal, ya que con solo tomar la primera componente se puede realizar una diferencia en cada conjunto. Esto no es de sorprenderse, debido a que la teoría para formar cada conjunto se basa en este algoritmo.
 \end{itemize}
 
 Realizando una comparación con las animaciones contenidas en las tablas \ref{table:isomap_results}, \ref{table:tsne_results} y \ref{table:pca_results} se observan las siguientes caracteristicas:
 
 \begin{itemize}
-    \item Los resultados mostrados por ISOMAP no varian tanto de su representación bidimensional. Esto es debido a que la mayoria de los datos estan contenidos en un plano independientemente del número de vecinos.
-    \item Para el algoritmo T-SNE se ve beneficiado de tener estructuras más separadas para valores menores de perplejidad en el caso trdimensional, esto es debido a que se logra visualizar el espacio donde se aglomera cada conjunto de datos.
-    \item En el caso del algoritmo de PCA, el kernel gaussiano y coseno se favorecen de una dimensión extra. Esto es debido a que los conjuntos formados son más diferenciables. Para el kernel sigmoide su representación bidimensional es mejor debido a que es más sencillo de visulizar cada conjunto, propiedad que se ve diluida en su representación tridimensional. En cambio para el el kernel lineal la mayoria de los datos se situan sobre un plano, por lo que es innecesaria su representación tridimensional.
+    \item Los resultados mostrados por ISOMAP no varian tanto de su representación bidimensional. Esto es debido a que la mayoría de los datos están contenidos en un plano independientemente del número de vecinos.
+    \item Para el algoritmo T-SNE se ve beneficiado de tener estructuras más separadas para valores menores de perplejidad en el caso tridimensional, esto es debido a que se logra visualizar el espacio donde se aglomera cada conjunto de datos.
+    \item En el caso del algoritmo de PCA, el kernel gaussiano y coseno se favorecen de una dimensión extra. Esto es debido a que los conjuntos formados son más diferenciables. Para el kernel sigmoide su representación bidimensional es mejor debido a que es más sencillo de visualizar cada conjunto, propiedad que se ve diluida en su representación tridimensional. En cambio, para el kernel lineal la mayoría de los datos se sitúan sobre un plano, por lo que es innecesaria su representación tridimensional.
 \end{itemize}
 
-Con las caracteristicas antes mencionadas, se obtiene que los mejores resultados son obtenidos usando el algoritmo PCA y sigmoide debido a que obtienen resultados semejantes en diferentes periodos y pueden diferenciar a cada conjunto con solo la primer componente. Si se quisiera buscar un método alternativo sería el uso del algoritmo de T-SNE para el caso bidimensional con una perplejidad igual o mayor a 300.
+Con las características antes mencionadas, se obtiene que los mejores resultados son los del algoritmo PCA con kernel lineal y sigmoide debido a que sus visualizaciones diferencian a cada conjunto con unicamente una componente en los dos periodos analizados. El uso del algoritmo de T-SNE para el caso bidimensional con una perplejidad igual o mayor a 300 sería una buena alternativa pero perdería la reproducibilidad de los resultados en un mismo periodo.
 
 \subsection{Algoritmos de clasificación}
 
-Para los algoritmos de clasificación presentados en este trabajo se encontro que ninguno logra obtener un resultado bueno. Esto se refleja en las tablas de confusión mostradas en las figuras \ref{fig:kmeans}, \ref{fig:cluster} y \ref{fig:som}. El algoritmo obtiene un número mayor de aciertos es el SOM. Con estos resultados se obtiene que el uso de algoritmos de clasificación no es la mejor opción debido a su diversidad de resultados.
+Para los algoritmos de clasificación presentados en este trabajo se encontro que ninguno logra obtener un resultado bueno. Esto se refleja en las tablas de confusión mostradas en las figuras \ref{fig:kmeans}, \ref{fig:cluster} y \ref{fig:som}. El algoritmo que obtiene un número mayor de aciertos es el SOM. Con estos resultados se observa que el uso de algoritmos de clasificación no es la mejor opción debido a su baja presición de resultados.
+
+\section{Código}
+
+Los códigos implementados en este documento se encuentra en el siguiente repositorio \href{https://github.com/giovannilopez9808/Reconocimiento_de_patrones_proyecto}{GitHub}.

@@ -7,42 +7,42 @@ Se descargo la base de datos de índice de marginación por municipio del period
 Se realizaron diversas modificaciones a los datos obtenidos de CONAPO. Las modificaciones que se realizaron son las siguientes:
 
 \begin{itemize}
-    \item  Para el archivo que contiene los datos del año 2015 se elimino la linea 1555 debido a que no se recabaron datos. Los datos correspondiente a esa linea son para el municipio de Nicolás Ruíz, Chiapas.
-    \item Las celdas que contenian el símbolo \textit{-} fueron eliminadas. Esto es porque el símbolo fue utilizado para señalar que no se recabo el datos correspondiente.
-    \item Los nombres de las cabeceras de columna fue modificado para que fueran igual a las mostradas en la tabla \ref*{table:diccionario}.
-    \item Del archivo que contiene los datos del año 2020 se produjo un archivo auxiliar del tipo \textit{csv}. En el archivo auxiliar se introdujo la información que se encuentra en la hoja llamada \textit{IMM\_2020}.
+	\item  	Para el archivo que contiene los datos del año 2015 se eliminó la línea 1555 debido a que no se recabaron datos correspondientes al municipio de Nicolás Ruíz, Chiapas.
+	\item Las celdas que contienen el símbolo \textit{-} fueron eliminadas. Esto es porque el símbolo fue utilizado para señalar que no se recabó el datos correspondiente.
+	\item Los nombres de las cabeceras de columna fue modificado para que fueran igual a las mostradas en la tabla \ref*{table:diccionario}.
+	\item Del archivo que contiene los datos del año 2020 se produjo un archivo auxiliar del tipo csv. La información extraída se encuentra en la hoja llamada \textit{IMM\_2020}.
 \end{itemize}
 
 En la figura \ref{fig:frecuency_relative} se muestra la frecuencia relativa de los índices de marginación para los 2469 municipios del año 2015 y 2020.
 
 \begin{figure}[H]
-    \centering
-    \begin{subfigure}{8.4cm}
-        \caption{Año 2015}
-        \includegraphics[width=1\linewidth]{Graphics/Data_2015/histogram_classes.png}
-    \end{subfigure}
-    \begin{subfigure}{8.4cm}
-        \caption{Año 2020}
-        \includegraphics[width=1\linewidth]{Graphics/Data_2020/histogram_classes.png}
-    \end{subfigure}
-    \caption{Frecuencia relativa de cada índice de marginación en los años 2015-2020 a nivel municipio.}
-    \label{fig:frecuency_relative}
+	\centering
+	\begin{subfigure}{8.4cm}
+		\caption{Año 2015}
+		\includegraphics[width=1\linewidth]{Graphics/Data_2015/histogram_classes.png}
+	\end{subfigure}
+	\begin{subfigure}{8.4cm}
+		\caption{Año 2020}
+		\includegraphics[width=1\linewidth]{Graphics/Data_2020/histogram_classes.png}
+	\end{subfigure}
+	\caption{Frecuencia relativa de cada índice de marginación en los años 2015-2020 a nivel municipio.}
+	\label{fig:frecuency_relative}
 \end{figure}
 
-En la figura \ref{fig:map_mexico} se muestran los índices de marginación para cada municipio en los años 2015 y 2020. Los datos para deliminar cada municipio fue obtenido del siguiente \href{https://blog.jjsantoso.com/mapas-distribucion-puntos/}{blog}\cite{mapa_mexico}. La distribución de los índices de marginación en la República Mexicana marca que se llegan a obtener valores bajos en la zona norte y valores altos en la zona del centro y sur del país.
+En la figura \ref{fig:map_mexico} se muestran los índices de marginación para cada municipio en los años 2015 y 2020. Los datos para delimitar cada municipio fue obtenido del siguiente \href{https://blog.jjsantoso.com/mapas-distribucion-puntos/}{blog}\cite{mapa_mexico}. La distribución de los índices de marginación en la República Mexicana marca que se llegan a obtener valores bajos en la zona norte y valores altos en la zona del centro y sur del país.
 
 \begin{figure}[H]
-    \centering
-    \begin{subfigure}{8.4cm}
-        \caption{Año 2015}
-        \includegraphics[width=1\linewidth]{Graphics/Data_2015/map.png}
-    \end{subfigure}
-    \begin{subfigure}{8.4cm}
-        \caption{Año 2020}
-        \includegraphics[width=1\linewidth]{Graphics/Data_2020/map.png}
-    \end{subfigure}
-    \caption{Grado de marginación a nivel municipio en la República Mexicana.}
-    \label{fig:map_mexico}
+	\centering
+	\begin{subfigure}{8.4cm}
+		\caption{Año 2015}
+		\includegraphics[width=1\linewidth]{Graphics/Data_2015/map.png}
+	\end{subfigure}
+	\begin{subfigure}{8.4cm}
+		\caption{Año 2020}
+		\includegraphics[width=1\linewidth]{Graphics/Data_2020/map.png}
+	\end{subfigure}
+	\caption{Grado de marginación a nivel municipio en la República Mexicana.}
+	\label{fig:map_mexico}
 \end{figure}
 
-A partir de las columnas de cada indicador (ANALF, SBASC, OVSDE, OVSEE, OVSAE, OVPT , VHAC , PL.50 y PO2SM) se creo una matriz de embeddings a la cual se normalizo siguiendo la ecuación \ref{eq:standar_variable}. Esta matriz será la que se le dara como valor de entrada a cada algoritmo presentado en la sección \ref{sec:methods}.
+A partir de las columnas de cada indicador (ANALF, SBASC, OVSDE, OVSEE, OVSAE, OVPT , VHAC , PL.50 y PO2SM) se creo una matriz de embeddings a la cual se normalizó siguiendo la ecuación \ref{eq:standar_variable}. Esta matriz será la que se le dara como valor de entrada a cada algoritmo presentado en la sección \ref{sec:methods}.

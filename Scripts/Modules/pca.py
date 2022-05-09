@@ -1,5 +1,5 @@
 """
-Clase que contiene la estructura para la ejecuccion del modelo de PCA para diferentes datos dado el número de componentes a obtener y el nombre del kernel
+Clase que contiene la estructura para la ejecuccion del algoritmo de PCA para diferentes datos dado el número de componentes a obtener y el nombre del kernel
 """
 
 from sklearn.decomposition import KernelPCA
@@ -12,7 +12,7 @@ class PCA_model:
 
     def create(self, n_components: int, kernel: str) -> None:
         """
-        Inicializa el modelo PCA dado el numero de componentes y el nombre del kernel
+        Inicializa el algoritmo PCA dado el numero de componentes y el nombre del kernel
         """
         self.model = KernelPCA(n_components,
                                kernel=kernel,
@@ -21,7 +21,7 @@ class PCA_model:
 
     def run(self, data: array) -> None:
         """
-        Ejecuta el modelo PCA dado un embedding
+        Ejecuta el algoritmo PCA dado un embedding
         """
         self.model.fit(data)
 

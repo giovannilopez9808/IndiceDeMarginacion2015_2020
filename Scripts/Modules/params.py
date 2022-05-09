@@ -1,3 +1,7 @@
+"""
+Definicion de parametros y nombres de archivos a usar para los diferentes programas y algoritmos
+"""
+
 from Modules.cluster_model import cluster_class
 from Modules.kmeans import kmeans_model
 from Modules.som import SOM_model
